@@ -1,12 +1,15 @@
 import Layout from "../../components/Layout/layout";
 import axios from "axios";
+import {useRouter} from 'next/router'
 import ProductCardDisplay from "../../components/product-card-display/product-card-display.component";
 import utilsStyles from "../../styles/utils.module.css";
 
 export default function Category({ payload: { category, products } }) {
+  const router = useRouter()
+  console.log(router)
   return (
     <Layout>
-      <div>
+      <div className="container">
         <h1>{category.category_name}</h1>
         <div className={utilsStyles.custom_flex_row}>
           {products.map((item) => {

@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "knex": "^0.21.1",
     "next": "9.4.2",
+    "pg": "^8.2.1",
     "react": "16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "16.13.1",

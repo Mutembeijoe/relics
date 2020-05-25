@@ -1,0 +1,39 @@
+.layout{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.details{
+    max-width: 500px;
+}
+
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid rgba(0,0,0,0.125);
+    width: 25rem;
+    height: 25rem;
+
+    img{
+        max-width: 23rem;
+        max-height: 23rem;
+    }
+}
+
+@media(max-width:576px){
+    .card{
+       width:18rem;
+       padding-left:15px;
+       padding-right:15px;
+
+        img{
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}
+
+// 1px solid rgba(0,0,0,0.125)
