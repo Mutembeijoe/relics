@@ -1,15 +1,18 @@
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 import * as yup from "yup";
 import { Formik } from "formik";
 
 export default function AddToCart({ options }) {
   const schema = yup.object({
-    quantity: yup.number().required().min(1),
-    size: yup.string().oneOf(options).required(),
+    quantity: yup
+      .number()
+      .required("Quantity is required")
+      .min(1, "Enter a Quantity of one or more"),
+    size: yup.string().oneOf(options).required("You must select a size"),
   });
-  console.log(options);
   return (
     <Formik
       validationSchema={schema}
@@ -28,11 +31,16 @@ export default function AddToCart({ options }) {
         errors,
         isSubmitting,
       }) => (
-        <Form
-          noValidate
-          onSubmit={handleSubmit}
-          style={{ border: "0px solid black" }}
-        >
+        <Form noValidate onSubmit={handleSubmit} className="mt-3">
+          {console.log(errors)}
+          <Alert
+            variant="danger"
+            className="mb-0"
+            style={{ visibility: `${!isValid ? "visible" : "hidden"}` }}
+          >
+            <ul className="mb-0">{Object.keys(errors).map((key) => (<li key={key}>{errors[key]}</li>))}
+            </ul>
+          </Alert>
           <Form.Row>
             <Form.Group as={Col} sm={3} controlId="formQuantity">
               <Form.Label column="lg" className="mb-1">
@@ -50,10 +58,6 @@ export default function AddToCart({ options }) {
                 isInvalid={!!errors.quantity}
                 isValid={touched.quantity && !errors.quantity}
               />
-              <Form.Control.Feedback type="invalid">
-                {errors.quantity}
-                Hello
-              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} controlId="formSizes">
               <Form.Label column="lg" className="mb-1">
@@ -77,9 +81,6 @@ export default function AddToCart({ options }) {
                   </option>
                 ))}
               </Form.Control>
-              <Form.Control.Feedback type="invalid">
-                {errors.size}
-              </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
           <Button
