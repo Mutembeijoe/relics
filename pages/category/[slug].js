@@ -1,19 +1,20 @@
 import Layout from "../../components/Layout/layout";
-import axios from "axios";
 import {useRouter} from 'next/router'
 import ProductCardDisplay from "../../components/product-card-display/product-card-display.component";
 import utilsStyles from "../../styles/utils.module.css";
+import { getAllCategorySlugs, getAllProductsInCategory } from "../../libs/knex";
 
-export default function Category({ payload: { category, products } }) {
-  const router = useRouter()
-  console.log(router)
+export default function Category({ products}) {
+  console.log(products)
+  // const router = useRouter()
+  // console.log(router)
   return (
     <Layout>
       <div className="container">
-        <h1>{category.category_name}</h1>
+        {/* <h1>{category.category_name}</h1> */}
         <div className={utilsStyles.custom_flex_row}>
-          {products.map((item) => {
-            return <ProductCardDisplay key={item.ID} item={item} />;
+          {products.map((product) => {
+            return <ProductCardDisplay key={product.id} item={product} />;
           })}
         </div>
       </div>
@@ -22,10 +23,9 @@ export default function Category({ payload: { category, products } }) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch("http://localhost:8080/categories");
-  const categories = await res.json();
-  const paths = categories.payload.map((category) => {
-    return { params: { slug: category.category_slug } };
+  const slugs = await getAllCategorySlugs()
+  const paths = slugs.map((slug) => {
+    return { params: { slug:slug.category_slug } };
   });
   return {
     paths,
@@ -34,14 +34,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const allCategoryProducts = await axios.get(
-    `http://localhost:8080/categories/${params.slug}/products`
-  );
-
-  const payload = allCategoryProducts.data;
+  const products = await getAllProductsInCategory(params.slug)
   return {
     props: {
-      payload,
+      products,
     },
   };
 }
