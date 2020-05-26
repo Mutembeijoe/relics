@@ -6,16 +6,15 @@ import Layout from "../components/Layout/layout";
 import styles from "../styles/home_page.module.scss";
 
 export default function Home({ slugs }) {
-  console.log(slugs);
   return (
     <Layout>
       <Head>
         <title>Home | Relics </title>
       </Head>
       <div className="container my-5 text-center">
-        <h5 className="text-primary">This site is Under construction /></h5>
+        <h5 className="text-primary">This site is Under construction</h5>
         <div className={`${styles.progressBox} my-4`} >
-        <ProgressBar className={styles.progressBar} variant="info" now={20} label={`20%`} animated />
+        <ProgressBar className={styles.progressBar} variant="info" now={10} label={`10%`} animated />
         </div>
         
         <div>

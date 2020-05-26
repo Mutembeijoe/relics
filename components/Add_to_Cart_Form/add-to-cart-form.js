@@ -74,7 +74,7 @@ export default function AddToCart({ options }) {
                 isInvalid={!!errors.size}
                 onChange={handleChange}
               >
-                <option value="">Select Value</option>
+                <option value="">Select Size</option>
                 {options.map((option) => (
                   <option value={option} key={option}>
                     {option}

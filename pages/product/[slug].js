@@ -8,7 +8,6 @@ import AddToCart from "../../components/Add_to_Cart_Form/add-to-cart-form";
 const regex = /[\[' \]]/gi;
 
 export default function Product({ product }) {
-  console.log(product);
   const options = product.options.sizes.replace(regex, "").split(",");
   return (
     <Layout>
