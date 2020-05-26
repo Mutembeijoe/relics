@@ -34,6 +34,11 @@ export async function getAllCategorySlugs(){
   return await knex("categories").select("category_slug")
 }
 
+// export async function getAllCategories(){
+//   return await knex("categories").select("category_slug, category")
+// }
+
+
 async function getCategoryBySlug(category_slug){
   return await knex("categories").first("id").where({category_slug})
 }

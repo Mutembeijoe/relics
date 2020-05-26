@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Button from "react-bootstrap/Button";
 import Layout from "../../components/Layout/layout";
 import { getAllProductSlugs, getProductBySlug } from "../../libs/knex";
@@ -19,10 +20,14 @@ export default function Product({ product }) {
             </div>
           </div>
           <div className={`${styles.sideCard} px-3`}>
-            <Button variant="outline-primary rounded mb-3" size="lg">
-              <i className="mdi mdi-arrow-left-bold mr-2"></i>
-              <span className="font-weight-bold">Back to Product List</span>
-            </Button>
+            <Link href="/category/[slug]" as={`/category/${product.category_slug}`}>
+              <a>
+                <Button variant="outline-primary rounded mb-3" size="lg">
+                  <i className="mdi mdi-arrow-left-bold mr-2"></i>
+                  <span className="font-weight-bold">Back to Product List</span>
+                </Button>
+              </a>
+            </Link>
             <div>
               <h2 className="text-primary font-weight-bold">
                 {product.product_name}
@@ -34,7 +39,7 @@ export default function Product({ product }) {
               </div>
             </div>
             <div>
-              <AddToCart options={options}/>
+              <AddToCart options={options} />
             </div>
           </div>
         </div>

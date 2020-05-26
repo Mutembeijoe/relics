@@ -1,0 +1,15 @@
+.cardDisplay{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.progressBox{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.progressBar{
+    height:30px;
+    width:18rem;
+}
