@@ -5,7 +5,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import Layout from "../components/Layout/layout";
 import styles from "../styles/home_page.module.scss";
 
-export default function Home({ slugs }) {
+export default function Home() {
   return (
     <Layout>
       <Head>
@@ -13,10 +13,16 @@ export default function Home({ slugs }) {
       </Head>
       <div className="container my-5 text-center">
         <h5 className="text-primary">This site is Under construction</h5>
-        <div className={`${styles.progressBox} my-4`} >
-        <ProgressBar className={styles.progressBar} variant="info" now={10} label={`10%`} animated />
+        <div className={`${styles.progressBox} my-4`}>
+          <ProgressBar
+            className={styles.progressBar}
+            variant="info"
+            now={10}
+            label={`10%`}
+            animated
+          />
         </div>
-        
+
         <div>
           <div className={styles.cardDisplay}>
             <Card
@@ -32,7 +38,6 @@ export default function Home({ slugs }) {
                 <Link href="/category/[slug]" as={`/category/t-shirts`}>
                   <a>
                     <Card.Title className="text-primary font-weight-bold">
-                      
                       <span className="mx-2">T-Shirts</span>
                       <i className="mdi mdi-arrow-right-bold" />
                     </Card.Title>
@@ -50,10 +55,10 @@ export default function Home({ slugs }) {
                 className="img-fluid"
               />
               <Card.Body>
-                <Link href="/category/[slug]" as={`/category/t-shirts`}>
+                <Link href="/category/[slug]" as={`/category/hoodies`}>
                   <a>
                     <Card.Title className="text-primary font-weight-bold">
-                    <span className="mx-2">Hoodies</span>
+                      <span className="mx-2">Hoodies</span>
                       <i className="mdi mdi-arrow-right-bold" />
                     </Card.Title>
                   </a>

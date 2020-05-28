@@ -4,8 +4,13 @@ import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import * as yup from "yup";
 import { Formik } from "formik";
+import { connect } from "react-redux";
+import { addItemTocart } from "../../redux/cart/actions";
 
-export default function AddToCart({ options }) {
+const regex = /[\[' \]]/gi;
+
+const AddToCart = ({ product, addToCart }) =>  {
+  const options = product.options.sizes.replace(regex, "").split(",");
   const schema = yup.object({
     quantity: yup
       .number()
@@ -16,7 +21,15 @@ export default function AddToCart({ options }) {
   return (
     <Formik
       validationSchema={schema}
-      onSubmit={console.log}
+      onSubmit={(value, actions)=>{
+        const cartItem = {
+          ...product,
+          ...value
+        }
+        addToCart(cartItem)
+        actions.setSubmitting(false)
+        actions.resetForm()
+      }}
       initialValues={{
         quantity: 1,
         size: "",
@@ -32,7 +45,7 @@ export default function AddToCart({ options }) {
         isSubmitting,
       }) => (
         <Form noValidate onSubmit={handleSubmit} className="mt-3">
-          {console.log(errors)}
+          {/* {console.log(errors)} */}
           <Alert
             variant="danger"
             className="mb-0"
@@ -70,6 +83,7 @@ export default function AddToCart({ options }) {
                 size="lg"
                 required
                 name="size"
+                value={values.size}
                 isValid={touched.size && !errors.size}
                 isInvalid={!!errors.size}
                 onChange={handleChange}
@@ -89,7 +103,7 @@ export default function AddToCart({ options }) {
             type="submit"
             size="lg"
             block
-            // disabled={isSubmitting}
+            disabled={isSubmitting}
           >
             <span className="font-weight-bold">Add To Cart</span>
             <i className="mdi mdi-cart mx-2"></i>
@@ -99,3 +113,9 @@ export default function AddToCart({ options }) {
     </Formik>
   );
 }
+
+const mapDispatchToProps = dispatch => ({
+    addToCart : (item) => dispatch(addItemTocart(item))
+})
+
+export default connect(null, mapDispatchToProps)(AddToCart);

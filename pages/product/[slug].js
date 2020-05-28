@@ -5,10 +5,7 @@ import { getAllProductSlugs, getProductBySlug } from "../../libs/knex";
 import styles from "../../styles/product_page.module.scss";
 import AddToCart from "../../components/Add_to_Cart_Form/add-to-cart-form";
 
-const regex = /[\[' \]]/gi;
-
 export default function Product({ product }) {
-  const options = product.options.sizes.replace(regex, "").split(",");
   return (
     <Layout>
       <div className="container my-4">
@@ -38,7 +35,7 @@ export default function Product({ product }) {
               </div>
             </div>
             <div>
-              <AddToCart options={options} />
+              <AddToCart product={product} />
             </div>
           </div>
         </div>
