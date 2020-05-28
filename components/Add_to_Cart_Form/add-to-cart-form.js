@@ -103,7 +103,7 @@ const AddToCart = ({ product, addToCart }) =>  {
             type="submit"
             size="lg"
             block
-            disabled={isSubmitting}
+            disabled={isSubmitting || Object.keys(errors).length !== 0}
           >
             <span className="font-weight-bold">Add To Cart</span>
             <i className="mdi mdi-cart mx-2"></i>
