@@ -1,12 +1,14 @@
+$pulse-light-yellow:#F8F31D;
+
 .cartIcon{
     position: relative;
+    cursor: pointer;
 
     span{
         position: absolute;
         top:-10%;
         right:0px;
-        color:rebeccapurple;
-        background-color: rgb(243, 158, 0);
+        background-color: $pulse-light-yellow;
         height:20px;
         width:20px;
         display: flex;

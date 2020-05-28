@@ -4,3 +4,10 @@
 a:hover{
     text-decoration: none;
 }
+
+.nav-link.active{
+    color:#593196 !important;
+}
+.nav-link:hover{
+    color:#593196 !important;
+}

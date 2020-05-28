@@ -30,8 +30,8 @@ const Header = () => {
           </Link>
         </Nav>
         <Nav>
-          <div className={styles.cartIcon}>
-            <i className="mdi mdi-cart mdi-36px text-primary"></i>
+          <div className={`${styles.cartIcon} text-primary`}>
+            <i className="mdi mdi-cart mdi-36px "></i>
             <span className="">10</span>
           </div>
         </Nav>
