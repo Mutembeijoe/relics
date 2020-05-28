@@ -1,27 +1,32 @@
 import { createStore, applyMiddleware } from "redux";
+import rootReducer from "./root-reducer";
 import logger from "redux-logger";
 import { createWrapper } from "next-redux-wrapper";
 
-const INITIAL_STATE = {
-  name: "",
+const bindMiddleware = (middlewares) => {
+  if (process.env.NODE_ENV !== "production") {
+    const { composeWithDevTools } = require("redux-devtools-extension");
+    return composeWithDevTools(applyMiddleware(...middlewares));
+  }
+  return applyMiddleware(...middlewares);
 };
 
-const reducer = (state = INITIAL_STATE, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
-    case "CHANGE_NAME":
-      return {
-        ...state,
-        name: action.payload,
+    case "HYDRATE":
+      const nextState = {
+        ...state, //use previous state
+        ...action.payload, //apply delta from hydration
       };
+      if (state.count) nextState.count = state.count; // preserve count value on client side navigation
+      return nextState;
     default:
-      return state;
+      return rootReducer(state, action);
   }
 };
 
-const middlewares = [logger]
+const initStore = () => {
+  return createStore(reducer, bindMiddleware([logger]));
+};
 
-
-const makeStore = context => createStore(reducer, applyMiddleware(...middlewares))
-
-// export an Assembled wrapper
-export const wrapper = createWrapper(makeStore, {debug:true})
+export const wrapper = createWrapper(initStore);
