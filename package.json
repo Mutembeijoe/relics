@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "classnames": "^2.2.6",
     "formik": "^2.1.4",
     "knex": "^0.21.1",
     "next": "9.4.2",

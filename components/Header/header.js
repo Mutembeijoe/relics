@@ -4,11 +4,11 @@ import Nav from "react-bootstrap/Nav";
 import { useRouter } from "next/router";
 import styles from './header.module.scss'
 
-const Header = () => {
+const Header = ({toggleCartOpen, cartOpen}) => {
   const router = useRouter();
   const path = router.asPath;
   return (
-    <Navbar className="border-bottom" bg="" expand="lg">
+    <Navbar className="border-bottom" bg="white" expand="lg" sticky="top">
       <Link href="/" passHref>
         <Navbar.Brand>Relics</Navbar.Brand>
       </Link>
@@ -30,7 +30,7 @@ const Header = () => {
           </Link>
         </Nav>
         <Nav>
-          <div className={`${styles.cartIcon} text-primary`}>
+          <div className={`${styles.cartIcon} text-primary`} onClick={()=>toggleCartOpen(!cartOpen)}>
             <i className="mdi mdi-cart mdi-36px "></i>
             <span className="">10</span>
           </div>
