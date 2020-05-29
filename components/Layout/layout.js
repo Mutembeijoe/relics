@@ -19,7 +19,7 @@ export default function Layout({ children }) {
           <main className="pt-5">{children}</main>
         </div>
         <footer>
-          <p>Ndirangujoe &copy;{new Date().getFullYear()}</p>
+          <p className="text-primary">Ndirangujoe &copy;{new Date().getFullYear()}</p>
         </footer>
       </div>
       <Cart cartOpen={cartOpen} toggleCartOpen={toggleCartOpen}/>

@@ -5,7 +5,7 @@ $pulse-secondary-color:#A991D4;
 
 .cart {
   height: 100vh;
-  overflow:scroll;
+  overflow-y:scroll;
   width: 380px;
   position: fixed;
   top: 0;
@@ -22,11 +22,13 @@ $pulse-secondary-color:#A991D4;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}s
+}
 
 .content {
   display: flex;
   flex-direction: column;
+  // border:5px solid green !important;
+  height:100%;
 }
 
 .cartBadgeContainer {

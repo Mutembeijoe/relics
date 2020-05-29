@@ -17,8 +17,8 @@ export default function Home() {
           <ProgressBar
             className={styles.progressBar}
             variant="primary"
-            now={10}
-            label={`10%`}
+            now={15}
+            label={`15%`}
             animated
           />
         </div>

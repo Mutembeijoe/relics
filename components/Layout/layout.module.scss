@@ -9,7 +9,7 @@
 
     & .main{
         flex-grow: 1;
-        border:1px solid black;
+        // border:1px solid black;
     }
 
     footer{
@@ -29,19 +29,3 @@
         
     }
 }
-
-// .cart{
-//     border:1px solid black;
-//     min-height:100vh;
-//     overflow-y: scroll;
-//     width:380px;
-//     position: fixed;
-//     top:0;
-//     right:0px;
-//     background-color: lightgrey;
-//     transition: right 0.3s;
-    
-//     &.cartCollapsed{
-//         right:-380px;
-//     }
-// }
