@@ -22,7 +22,7 @@ export default function Layout({ children }) {
           <p>Ndirangujoe &copy;{new Date().getFullYear()}</p>
         </footer>
       </div>
-      <Cart cartOpen={cartOpen}/>
+      <Cart cartOpen={cartOpen} toggleCartOpen={toggleCartOpen}/>
     </div>
   );
 }

@@ -4,8 +4,8 @@ $pulse-primary-color:#593196;
 $pulse-secondary-color:#A991D4;
 
 .cart {
-  min-height: 100vh;
-  overflow-y: scroll;
+  height: 100vh;
+  overflow:scroll;
   width: 380px;
   position: fixed;
   top: 0;
@@ -17,16 +17,16 @@ $pulse-secondary-color:#A991D4;
   }
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}s
+
 .content {
   display: flex;
   flex-direction: column;
-
-  .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
 }
 
 .cartBadgeContainer {

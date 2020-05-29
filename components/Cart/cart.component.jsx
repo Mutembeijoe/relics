@@ -1,21 +1,26 @@
 import cn from "classnames";
-import styles from "./cart.module.scss";
+import Button from "react-bootstrap/Button";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+
 import {
   cartItemsCount,
   cartItemsSelector,
   cartTotalPrice,
 } from "../../redux/cart/selectors";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+
 import {
   removeItemFromCart,
   increaseItemQuantity,
   decreaseItemQuantity,
 } from "../../redux/cart/actions";
 
+import styles from "./cart.module.scss";
+
 const Cart = (props) => {
   const {
     cartOpen,
+    toggleCartOpen,
     cartItemsCount,
     cartItems,
     removeItem,
@@ -25,20 +30,25 @@ const Cart = (props) => {
   } = props;
   return (
     <div className={cn(styles.cart, { [styles.cartCollapsed]: !cartOpen })}>
-      <div className={`${styles.content} mx-2`}>
-        <div className={styles.header}>
-          <h2>Your Cart</h2>
-          <div className={`${styles.cartBadgeContainer} py-4`}>
-            <span>Items in Cart</span>
-            <div
-              className={`${styles.cartBadge} mx-2 text-primary font-weight-bold`}
-            >
-              {cartItemsCount}
-            </div>
+      <div
+        className={`${styles.header} sticky-top bg-white border-bottom mb-4`}
+      >
+        <h2>Your Cart</h2>
+        <div className={`${styles.cartBadgeContainer} py-4`}>
+          <span>Items in Cart</span>
+          <div
+            className={`${styles.cartBadge} mx-2 text-primary font-weight-bold`}
+          >
+            {cartItemsCount}
           </div>
         </div>
+      </div>
+
+      <div className={`${styles.content} mx-2`}>
         <div className={styles.cartItems}>
-          <div className={`${styles.cartItemsHeader} border-bottom`}>
+          <div
+            className={`${styles.cartItemsHeader} border-bottom font-weight-bold`}
+          >
             <div className={styles.productCol}>Product</div>
             <div className={styles.qtyCol}>Qty</div>
             <div className={styles.rmvCol}>Remove</div>
@@ -91,24 +101,45 @@ const Cart = (props) => {
           <div className="d-flex flex-column border-bottom py-3">
             <div className="d-flex flex-row justify-content-end">
               <div className="w-50">Sub Total</div>
-              <div>KSh {cartTotalPrice}</div>
+              <div className="text-primary font-weight-bold">
+                KSh {cartTotalPrice}
+              </div>
             </div>
             <div className="d-flex flex-row justify-content-end">
               <div className="w-50">Taxes</div>
-              <div>0.00</div>
+              <div className="text-primary font-weight-bold">0.00</div>
             </div>
             <div className="d-flex flex-row justify-content-end">
               <div className="w-50">Shipping</div>
-              <div>Ksh 200</div>
+              <div className="text-primary font-weight-bold">Ksh 200</div>
             </div>
             <div className="d-flex flex-row"></div>
           </div>
           <div>
             <div className="d-flex flex-row justify-content-end py-2">
-              <div className="w-50">Total</div>
-              <div>KSh {cartTotalPrice + 200}</div>
+              <div className="w-50 text-primary font-weight-bold h5">Total</div>
+              <div className="text-primary font-weight-bold h5">
+                KSh {cartTotalPrice + 200}
+              </div>
             </div>
           </div>
+        </div>
+        <div className="my-3">
+          <Button className="rounded" variant="primary" size="lg" block>
+            CheckOut
+            <i className="mdi mdi-arrow-right-bold mx-1" />
+          </Button>
+
+          <Button
+            onClick={() => toggleCartOpen(!cartOpen)}
+            className="rounded mx-1"
+            variant="outline-primary"
+            size="lg"
+            block
+          >
+            <i className="mdi mdi-arrow-left-bold mx-1" />
+            Continue shopping
+          </Button>
         </div>
       </div>
     </div>
