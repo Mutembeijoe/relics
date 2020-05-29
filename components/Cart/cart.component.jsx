@@ -2,8 +2,10 @@ import cn from "classnames";
 import Table from 'react-bootstrap/Table'
 
 import styles from "./cart.module.scss";
+import { cartItemsCount } from "../../redux/cart/selectors";
+import { connect } from "react-redux";
 
-const Cart = ({ cartOpen }) => {
+const Cart = ({ cartOpen, cartItemsCount }) => {
   return (
     <div className={cn(styles.cart, { [styles.cartCollapsed]: !cartOpen })}>
       <div className={`${styles.content}`}>
@@ -14,7 +16,7 @@ const Cart = ({ cartOpen }) => {
             <div
               className={`${styles.cartBadge} mx-2 text-primary font-weight-bold`}
             >
-              10
+              {cartItemsCount}
             </div>
           </div>
         </div>
@@ -50,4 +52,8 @@ const Cart = ({ cartOpen }) => {
   );
 };
 
-export default Cart;
+const mapStateToProps = (state) => ({
+    cartItemsCount: cartItemsCount(state)
+})
+
+export default connect(mapStateToProps)(Cart);

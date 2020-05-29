@@ -3,8 +3,10 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { useRouter } from "next/router";
 import styles from './header.module.scss'
+import { connect } from "react-redux";
+import { cartItemsCount } from "../../redux/cart/selectors";
 
-const Header = ({toggleCartOpen, cartOpen}) => {
+const Header = ({toggleCartOpen, cartOpen, cartItemsCount}) => {
   const router = useRouter();
   const path = router.asPath;
   return (
@@ -32,7 +34,7 @@ const Header = ({toggleCartOpen, cartOpen}) => {
         <Nav>
           <div className={`${styles.cartIcon} text-primary`} onClick={()=>toggleCartOpen(!cartOpen)}>
             <i className="mdi mdi-cart mdi-36px "></i>
-            <span className="">10</span>
+            <span className="">{cartItemsCount}</span>
           </div>
         </Nav>
       </Navbar.Collapse>
@@ -40,4 +42,8 @@ const Header = ({toggleCartOpen, cartOpen}) => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  cartItemsCount: cartItemsCount(state)
+})
+
+export default connect(mapStateToProps)(Header);
