@@ -1,6 +1,14 @@
 import cartActionTypes from "./types";
 
-export const addItemTocart = (item) => ({
+export const addItemToCart = (item) => ({
   type: cartActionTypes.ADD_ITEM,
-  payload: item,
+  payload: item
 });
+
+export const removeItemFromCart = (itemID,size) => ({
+  type:cartActionTypes.REMOVE_ITEM,
+  payload:{
+    id:itemID,
+    size
+  }
+})

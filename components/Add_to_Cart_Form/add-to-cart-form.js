@@ -5,7 +5,7 @@ import Alert from "react-bootstrap/Alert";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { connect } from "react-redux";
-import { addItemTocart } from "../../redux/cart/actions";
+import { addItemToCart } from "../../redux/cart/actions";
 
 const regex = /[\[' \]]/gi;
 
@@ -115,7 +115,7 @@ const AddToCart = ({ product, addToCart }) =>  {
 }
 
 const mapDispatchToProps = dispatch => ({
-    addToCart : (item) => dispatch(addItemTocart(item))
+    addToCart : (item) => dispatch(addItemToCart(item))
 })
 
 export default connect(null, mapDispatchToProps)(AddToCart);
