@@ -20,12 +20,12 @@ const Header = ({toggleCartOpen, cartOpen, cartItemsCount}) => {
           <Link href="/" passHref>
             <Nav.Link className={path == "/" ? "active" : ""}>Home</Nav.Link>
           </Link>
-          <Link href="/category/t-shirts" passHref>
+          <Link href="/category/[slug]" as="/category/t-shirts" passHref>
             <Nav.Link className={path == "/category/t-shirts" ? "active" : ""}>
               T-shirts
             </Nav.Link>
           </Link>
-          <Link href="/category/hoodies" passHref>
+          <Link href="/category/[slug]" as="/category/hoodies" passHref>
             <Nav.Link className={path == "/category/hoodies" ? "active" : ""}>
               Hoodies
             </Nav.Link>
