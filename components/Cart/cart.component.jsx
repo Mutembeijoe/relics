@@ -1,11 +1,28 @@
 import cn from "classnames";
 import styles from "./cart.module.scss";
-import { cartItemsCount, cartItemsSelector, cartTotalPrice } from "../../redux/cart/selectors";
+import {
+  cartItemsCount,
+  cartItemsSelector,
+  cartTotalPrice,
+} from "../../redux/cart/selectors";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { removeItemFromCart } from "../../redux/cart/actions";
+import {
+  removeItemFromCart,
+  increaseItemQuantity,
+  decreaseItemQuantity,
+} from "../../redux/cart/actions";
 
-const Cart = ({ cartOpen, cartItemsCount, cartItems, removeItem, cartTotalPrice }) => {
+const Cart = (props) => {
+  const {
+    cartOpen,
+    cartItemsCount,
+    cartItems,
+    removeItem,
+    cartTotalPrice,
+    increaseItem,
+    decreaseItem,
+  } = props;
   return (
     <div className={cn(styles.cart, { [styles.cartCollapsed]: !cartOpen })}>
       <div className={`${styles.content} mx-2`}>
@@ -29,7 +46,9 @@ const Cart = ({ cartOpen, cartItemsCount, cartItems, removeItem, cartTotalPrice 
           <div className={styles.allItems}>
             {cartItems.map((item) => {
               return (
-                <div className={`${styles.item} py-3 border-bottom border-light`}>
+                <div
+                  className={`${styles.item} py-3 border-bottom border-light`}
+                >
                   <div className={`${styles.productCell}`}>
                     <div className={styles.itemImage}>
                       <img
@@ -48,10 +67,12 @@ const Cart = ({ cartOpen, cartItemsCount, cartItems, removeItem, cartTotalPrice 
                   </div>
                   <div className={styles.qtyCell}>
                     <i
+                      onClick={() => increaseItem(item.id, item.size)}
                       className={`mdi mdi-chevron-up mdi-24px ${styles.chevron}`}
                     ></i>
                     {item.quantity}
                     <i
+                      onClick={() => decreaseItem(item.id, item.size)}
                       className={`mdi mdi-chevron-down mdi-24px ${styles.chevron}`}
                     ></i>
                   </div>
@@ -97,10 +118,12 @@ const Cart = ({ cartOpen, cartItemsCount, cartItems, removeItem, cartTotalPrice 
 const mapStateToProps = createStructuredSelector({
   cartItemsCount: cartItemsCount,
   cartItems: cartItemsSelector,
-  cartTotalPrice : cartTotalPrice
+  cartTotalPrice: cartTotalPrice,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   removeItem: (itemID, size) => dispatch(removeItemFromCart(itemID, size)),
+  increaseItem: (itemID, size) => dispatch(increaseItemQuantity(itemID, size)),
+  decreaseItem: (itemID, size) => dispatch(decreaseItemQuantity(itemID, size)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
