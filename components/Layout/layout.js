@@ -3,6 +3,7 @@ import Header from "../Header/header";
 import styles from "./layout.module.scss";
 import { useState } from "react";
 import cn from 'classnames'
+import Cart from "../Cart/cart.component";
 
 export default function Layout({ children }) {
   const [cartOpen, toggleCartOpen] = useState(false)
@@ -15,15 +16,13 @@ export default function Layout({ children }) {
       <div className={cn(styles.container, {[styles.containerCollapsed]:cartOpen})}>
         <div className={styles.main}>
           <Header toggleCartOpen={toggleCartOpen} cartOpen={cartOpen}></Header>
-          <main>{children}</main>
+          <main className="pt-5">{children}</main>
         </div>
         <footer>
           <p>Ndirangujoe &copy;{new Date().getFullYear()}</p>
         </footer>
       </div>
-      <div className={cn(styles.cart, {[styles.cartCollapsed]:!cartOpen})}>
-        MY CART
-      </div>
+      <Cart cartOpen={cartOpen}/>
     </div>
   );
 }

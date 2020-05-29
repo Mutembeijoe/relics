@@ -1,0 +1,44 @@
+$pulse-light-yellow:#F8F31D;
+.cart{
+    min-height:100vh;
+    overflow-y: scroll;
+    width:380px;
+    position: fixed;
+    top:0;
+    right:0px;
+    transition: right 0.3s;
+    
+    &.cartCollapsed{
+        right:-380px;
+    }
+}
+
+.content{
+    display:flex;
+    flex-direction: column;
+
+    .header{
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border:1px solid black;
+    }
+}
+
+.cartBadgeContainer{
+    display: flex;
+    align-items: center;
+
+    .cartBadge{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:30px;
+        width:30px;
+        text-align: center;
+        background-color:$pulse-light-yellow;
+        border-radius: 50%;    
+    }
+}
+

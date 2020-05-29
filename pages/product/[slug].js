@@ -8,7 +8,7 @@ import AddToCart from "../../components/Add_to_Cart_Form/add-to-cart-form";
 export default function Product({ product }) {
   return (
     <Layout>
-      <div className="container my-4">
+      <div className="container">
         <div className={styles.layout}>
           <div>
             <div className={`${styles.card} shadow p-3 mb-5 bg-white rounded`}>

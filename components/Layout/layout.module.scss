@@ -9,6 +9,7 @@
 
     & .main{
         flex-grow: 1;
+        border:1px solid black;
     }
 
     footer{
@@ -20,22 +21,27 @@
     &.containerCollapsed{
         right:380px;
         overflow:hidden;
+
+        main{
+            filter: blur(1.5px);
+            background-color: lightgrey;
+        }
         
     }
 }
 
-.cart{
-    border:1px solid black;
-    min-height:100vh;
-    overflow-y: scroll;
-    width:380px;
-    position: fixed;
-    top:0;
-    right:0px;
-    background-color: lightgrey;
-    transition: right 0.3s;
+// .cart{
+//     border:1px solid black;
+//     min-height:100vh;
+//     overflow-y: scroll;
+//     width:380px;
+//     position: fixed;
+//     top:0;
+//     right:0px;
+//     background-color: lightgrey;
+//     transition: right 0.3s;
     
-    &.cartCollapsed{
-        right:-380px;
-    }
-}
+//     &.cartCollapsed{
+//         right:-380px;
+//     }
+// }

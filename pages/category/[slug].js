@@ -12,7 +12,7 @@ export default function Category({ products}) {
     <Layout>
       <div className="container">
         {/* <h1>{category.category_name}</h1> */}
-        <div className={`${utilsStyles.custom_flex_row} mt-5`}>
+        <div className={utilsStyles.custom_flex_row}>
           {products.map((product) => {
             return <ProductCardDisplay key={product.id} item={product} />;
           })}

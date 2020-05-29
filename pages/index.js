@@ -11,12 +11,12 @@ export default function Home() {
       <Head>
         <title>Home | Relics </title>
       </Head>
-      <div className="container my-5 text-center">
+      <div className="container text-center">
         <h5 className="text-primary">This site is Under construction</h5>
         <div className={`${styles.progressBox} my-4`}>
           <ProgressBar
             className={styles.progressBar}
-            variant="info"
+            variant="primary"
             now={10}
             label={`10%`}
             animated
