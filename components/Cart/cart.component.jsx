@@ -1,11 +1,11 @@
 import cn from "classnames";
 import styles from "./cart.module.scss";
-import { cartItemsCount, cartItemsSelector } from "../../redux/cart/selectors";
+import { cartItemsCount, cartItemsSelector, cartTotalPrice } from "../../redux/cart/selectors";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { removeItemFromCart } from "../../redux/cart/actions";
 
-const Cart = ({ cartOpen, cartItemsCount, cartItems, removeItem }) => {
+const Cart = ({ cartOpen, cartItemsCount, cartItems, removeItem, cartTotalPrice }) => {
   return (
     <div className={cn(styles.cart, { [styles.cartCollapsed]: !cartOpen })}>
       <div className={`${styles.content} mx-2`}>
@@ -70,7 +70,7 @@ const Cart = ({ cartOpen, cartItemsCount, cartItems, removeItem }) => {
           <div className="d-flex flex-column border-bottom py-3">
             <div className="d-flex flex-row justify-content-end">
               <div className="w-50">Sub Total</div>
-              <div>KSh 637</div>
+              <div>KSh {cartTotalPrice}</div>
             </div>
             <div className="d-flex flex-row justify-content-end">
               <div className="w-50">Taxes</div>
@@ -85,7 +85,7 @@ const Cart = ({ cartOpen, cartItemsCount, cartItems, removeItem }) => {
           <div>
             <div className="d-flex flex-row justify-content-end py-2">
               <div className="w-50">Total</div>
-              <div>KSh 637</div>
+              <div>KSh {cartTotalPrice + 200}</div>
             </div>
           </div>
         </div>
@@ -97,6 +97,7 @@ const Cart = ({ cartOpen, cartItemsCount, cartItems, removeItem }) => {
 const mapStateToProps = createStructuredSelector({
   cartItemsCount: cartItemsCount,
   cartItems: cartItemsSelector,
+  cartTotalPrice : cartTotalPrice
 });
 
 const mapDispatchToProps = (dispatch) => ({
