@@ -17,6 +17,7 @@ export async function getAllProductSlugs() {
 export async function getProductBySlug(slug) {
   return await knex("products")
     .first(
+      "products.id",
       "product_name",
       "product_slug",
       "price",

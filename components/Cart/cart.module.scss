@@ -42,3 +42,13 @@ $pulse-light-yellow:#F8F31D;
     }
 }
 
+.product{
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+
+    div:first-child{
+        width:50px;
+        height: auto;
+    }
+}

@@ -1,11 +1,12 @@
 import cn from "classnames";
-import Table from 'react-bootstrap/Table'
+import Table from "react-bootstrap/Table";
 
 import styles from "./cart.module.scss";
-import { cartItemsCount } from "../../redux/cart/selectors";
+import { cartItemsCount, cartItemsSelector } from "../../redux/cart/selectors";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
-const Cart = ({ cartOpen, cartItemsCount }) => {
+const Cart = ({ cartOpen, cartItemsCount, cartItems }) => {
   return (
     <div className={cn(styles.cart, { [styles.cartCollapsed]: !cartOpen })}>
       <div className={`${styles.content}`}>
@@ -30,16 +31,18 @@ const Cart = ({ cartOpen, cartItemsCount }) => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
+              {cartItems.map((item) => (
+                <tr>
+                  <td className={styles.product}>
+                    <div>
+                      <img src={item.image_url} alt="" className="img-fluid border "/>
+                    </div>
+                    <span className="pl-3 font-weight-bold">{item.product_name}</span>
+                  </td>
+                  <td>{item.quantity}</td>
+                  <td>x</td>
+                </tr>
+              ))}
               <tr>
                 <td colSpan="2">Larry the Bird</td>
                 <td>@twitter</td>
@@ -52,8 +55,9 @@ const Cart = ({ cartOpen, cartItemsCount }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-    cartItemsCount: cartItemsCount(state)
-})
+const mapStateToProps = createStructuredSelector({
+  cartItemsCount: cartItemsCount,
+  cartItems: cartItemsSelector,
+});
 
 export default connect(mapStateToProps)(Cart);
