@@ -34,7 +34,7 @@ const Cart = (props) => {
         className={`${styles.header} sticky-top bg-white border-bottom border-left mb-4`}
       >
         <h2>Your Cart</h2>
-        <div className={`${styles.cartBadgeContainer} py-4`}>
+        <div className={`${styles.cartBadgeContainer}`}>
           <span>Items in Cart</span>
           <div
             className={`${styles.cartBadge} mx-2 text-primary font-weight-bold`}

@@ -10,7 +10,7 @@ const Header = ({toggleCartOpen, cartOpen, cartItemsCount}) => {
   const router = useRouter();
   const path = router.asPath;
   return (
-    <Navbar className="border-bottom" bg="white" expand="lg" sticky="top">
+    <Navbar className="border-bottom py-0 pr-0" bg="white" expand="lg" sticky="top">
       <Link href="/" passHref>
         <Navbar.Brand>Relics</Navbar.Brand>
       </Link>
@@ -32,10 +32,17 @@ const Header = ({toggleCartOpen, cartOpen, cartItemsCount}) => {
           </Link>
         </Nav>
         <Nav>
-          <div className={`${styles.cartIcon} text-primary`} onClick={()=>toggleCartOpen(!cartOpen)}>
+        {cartOpen ?
+          <div className={`${styles.closeIcon} text-primary p-3`} onClick={()=>toggleCartOpen(!cartOpen)}>
+            <i className="mdi mdi-close mdi-36px "></i>
+            {/* <span className="">{cartItemsCount}</span> */}
+          </div>
+          :
+          <div className={`${styles.cartIcon} text-primary p-3`} onClick={()=>toggleCartOpen(!cartOpen)}>
             <i className="mdi mdi-cart mdi-36px "></i>
             <span className="">{cartItemsCount}</span>
           </div>
+        }
         </Nav>
       </Navbar.Collapse>
     </Navbar>

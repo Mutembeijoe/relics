@@ -22,13 +22,15 @@ $pulse-secondary-color:#A991D4;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding-top: 15px;
+  padding-bottom:15px;
 }
 
 .content {
   display: flex;
   flex-direction: column;
   // border:5px solid green !important;
-  height:100%;
+  // height:100%;
 }
 
 .cartBadgeContainer {
