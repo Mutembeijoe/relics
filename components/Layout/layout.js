@@ -19,14 +19,12 @@ export default function Layout({ children }) {
         })}
       >
         <Header toggleCartOpen={toggleCartOpen} cartOpen={cartOpen} />
-          <div className={styles.main}>
-            <main className="pt-5">{children}</main>
-          </div>
-          <footer>
-            <p className="text-primary">
-              Ndirangujoe &copy;{new Date().getFullYear()}
-            </p>
-          </footer>
+        <main className={`${styles.main} pt-5`}>{children}</main>
+        <footer>
+          <p className="text-primary">
+            Ndirangujoe &copy;{new Date().getFullYear()}
+          </p>
+        </footer>
       </div>
       <Cart cartOpen={cartOpen} toggleCartOpen={toggleCartOpen} />
     </div>

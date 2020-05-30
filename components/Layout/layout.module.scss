@@ -1,3 +1,5 @@
+$pulse_light_grey:#E5E5E5;
+
 .container{
     display: flex;
     flex-direction: column;
@@ -7,9 +9,8 @@
     right:0;
     transition: right 0.3s;
 
-    & .main{
+    main{
         flex-grow: 1;
-        // border:1px solid black;
     }
 
     footer{
@@ -21,11 +22,11 @@
     &.containerCollapsed{
         right:380px;
         overflow:hidden;
+        background-color:$pulse_light_grey;
 
-        main{
+        main,footer{
+            pointer-events: none;
             filter: blur(1.5px);
-            background-color: lightgrey;
         }
-        
     }
 }
