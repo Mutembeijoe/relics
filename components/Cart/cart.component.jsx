@@ -59,6 +59,7 @@ const Cart = (props) => {
                 {cartItems.map((item) => {
                   return (
                     <div
+                      key={`${item.id}${item.size}`}
                       className={`${styles.item} py-3 border-bottom border-light`}
                     >
                       <div className={`${styles.productCell}`}>
