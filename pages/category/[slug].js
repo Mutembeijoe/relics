@@ -5,7 +5,7 @@ import utilsStyles from "../../styles/utils.module.css";
 import { getAllCategorySlugs, getAllProductsInCategory } from "../../libs/knex";
 
 export default function Category({ products}) {
-  console.log(products)
+  // console.log(products)
   // const router = useRouter()
   // console.log(router)
   return (
