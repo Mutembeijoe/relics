@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Button from "react-bootstrap/Button";
 import Layout from "../../components/Layout/layout";
-import { getAllProductSlugs, getProductBySlug } from "../../libs/knex";
+// import { getAllProductSlugs, getProductBySlug } from "../../libs/knex";
 import styles from "../../styles/product_page.module.scss";
 import AddToCart from "../../components/Add_to_Cart_Form/add-to-cart-form";
+import { getProductBySlug, getAllProductSlugs } from "../../database/Queries/product";
 
 export default function Product({ product }) {
   return (
@@ -12,7 +13,7 @@ export default function Product({ product }) {
         <div className={styles.layout}>
           <div>
             <div className={`${styles.card} shadow p-3 mb-5 bg-white rounded`}>
-              <img src={product.image_url} alt={product.product_name} />
+              <img src={product.img_url} alt={product.product_name} />
             </div>
           </div>
           <div className={`${styles.sideCard} px-3`}>
@@ -62,6 +63,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const product = await getProductBySlug(params.slug);
+  console.log(product)
   return {
     props: {
       product: product,

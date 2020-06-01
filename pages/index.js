@@ -35,7 +35,7 @@ export default function Home() {
                 className="img-fluid"
               />
               <Card.Body>
-                <Link href="/category/[slug]" as={`/category/t-shirts`}>
+                <Link href="/category/[slug]" as={`/category/tees`}>
                   <a>
                     <Card.Title className="text-primary font-weight-bold">
                       <span className="mx-2">T-Shirts</span>

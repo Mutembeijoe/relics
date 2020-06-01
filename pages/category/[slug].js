@@ -1,17 +1,13 @@
 import Layout from "../../components/Layout/layout";
-import {useRouter} from 'next/router'
 import ProductCardDisplay from "../../components/product-card-display/product-card-display.component";
 import utilsStyles from "../../styles/utils.module.css";
-import { getAllCategorySlugs, getAllProductsInCategory } from "../../libs/knex";
+import { getAllCategorySlugs } from "../../database/Queries/category";
+import { getAllProductsInCategory } from "../../database/Queries/product";
 
 export default function Category({ products}) {
-  // console.log(products)
-  // const router = useRouter()
-  // console.log(router)
   return (
     <Layout>
       <div className="container">
-        {/* <h1>{category.category_name}</h1> */}
         <div className={utilsStyles.custom_flex_row}>
           {products.map((product) => {
             return <ProductCardDisplay key={product.id} item={product} />;

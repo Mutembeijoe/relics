@@ -10,7 +10,7 @@ const ProductCardDisplay = ({ item }) => (
       >
         <div className={`${productCardStyles.cardImgBox}`}>
           <img
-            src={item.image_url}
+            src={item.img_url}
             className={`${productCardStyles.cardImg}`}
             alt={item.product_name}
           />

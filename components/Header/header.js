@@ -20,8 +20,8 @@ const Header = ({toggleCartOpen, cartOpen, cartItemsCount}) => {
           <Link href="/" passHref>
             <Nav.Link className={path == "/" ? "active" : ""}>Home</Nav.Link>
           </Link>
-          <Link href="/category/[slug]" as="/category/t-shirts" passHref>
-            <Nav.Link className={path == "/category/t-shirts" ? "active" : ""}>
+          <Link href="/category/[slug]" as="/category/tees" passHref>
+            <Nav.Link className={path == "/category/tees" ? "active" : ""}>
               T-shirts
             </Nav.Link>
           </Link>
@@ -35,7 +35,6 @@ const Header = ({toggleCartOpen, cartOpen, cartItemsCount}) => {
         {cartOpen ?
           <div className={`${styles.closeIcon} text-primary p-3`} onClick={()=>toggleCartOpen(!cartOpen)}>
             <i className="mdi mdi-close mdi-36px "></i>
-            {/* <span className="">{cartItemsCount}</span> */}
           </div>
           :
           <div className={`${styles.cartIcon} text-primary p-3`} onClick={()=>toggleCartOpen(!cartOpen)}>

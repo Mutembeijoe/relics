@@ -7,16 +7,13 @@ import { Formik } from "formik";
 import { connect } from "react-redux";
 import { addItemToCart } from "../../redux/cart/actions";
 
-const regex = /[\[' \]]/gi;
-
 const AddToCart = ({ product, addToCart }) =>  {
-  const options = product.options.sizes.replace(regex, "").split(",");
   const schema = yup.object({
     quantity: yup
       .number()
       .required("Quantity is required")
       .min(1, "Enter a Quantity of one or more"),
-    size: yup.string().oneOf(options).required("You must select a size"),
+    size: yup.string().oneOf(product.options.sizes).required("You must select a size"),
   });
   return (
     <Formik
@@ -89,9 +86,9 @@ const AddToCart = ({ product, addToCart }) =>  {
                 onChange={handleChange}
               >
                 <option value="">Select Size</option>
-                {options.map((option) => (
-                  <option value={option} key={option}>
-                    {option.toUpperCase()}
+                {product.options.sizes.map((size) => (
+                  <option value={size} key={size}>
+                    {size}
                   </option>
                 ))}
               </Form.Control>

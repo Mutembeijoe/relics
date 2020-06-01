@@ -65,7 +65,7 @@ const Cart = (props) => {
                       <div className={`${styles.productCell}`}>
                         <div className={styles.itemImage}>
                           <img
-                            src={item.image_url}
+                            src={item.img_url}
                             alt=""
                             className="img-fluid border"
                           />
