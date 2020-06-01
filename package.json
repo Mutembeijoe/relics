@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
+    "dotenv": "^8.2.0",
     "formik": "^2.1.4",
     "knex": "^0.21.1",
     "next": "9.4.2",
@@ -24,6 +25,7 @@
     "redux-logger": "^3.0.6",
     "reselect": "^4.0.0",
     "sass": "^1.26.5",
+    "slugify": "^1.4.0",
     "yup": "^0.29.0"
   }
 }
