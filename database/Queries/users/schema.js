@@ -9,5 +9,5 @@ export const userSchema = Joi.object({
       minDomainSegments: 2,
       tlds: { allow: ["com", "net"] },
     })
-    .required()
+    .required(),
 }).with("password", "repeat_password");

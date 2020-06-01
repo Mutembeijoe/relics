@@ -9,3 +9,13 @@ export const createUser = async (user) => {
     })
     .returning("id");
 };
+
+const getUserByEmail = async (email) => {
+  return await knex("users").first("email").where("email", email);
+};
+
+export const verifyEmailExists = async (email) => {
+  const user = await getUserByEmail(email);
+  if (!user) return false;
+  return true;
+};
