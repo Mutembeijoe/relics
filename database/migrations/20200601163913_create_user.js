@@ -6,6 +6,7 @@ exports.up = function(knex) {
       table.timestamp("deleted_at").nullable()
       table.string("username").notNullable();
       table.string("password").notNullable();
+      table.string("email").notNullable().unique()
   })
 };
 
