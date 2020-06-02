@@ -24,7 +24,7 @@ const CheckoutForm = () => {
       .string()
       .oneOf(["Nairobi", "Kajiado", "Kiambu", "Mombasa", "Nakuru", "Nyeri"])
       .required("You must select a county"),
-    terms: yup.boolean().required().equals([true])
+    terms: yup.boolean().required().equals([true]),
   });
   return (
     <Formik
@@ -32,7 +32,7 @@ const CheckoutForm = () => {
       onSubmit={(value, actions) => {
         console.log(value);
         actions.resetForm();
-        actions.setSubmitting(false)
+        actions.setSubmitting(false);
       }}
       initialValues={{
         email: "",
@@ -51,12 +51,11 @@ const CheckoutForm = () => {
         values,
         handleChange,
         touched,
-        isValid,
         errors,
+        isValid,
         isSubmitting,
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
-        {console.log(errors)}
           {/* Contacts Section */}
           <fieldset className="my-3">
             <legend>Contact Information</legend>
@@ -70,9 +69,12 @@ const CheckoutForm = () => {
                   className="rounded"
                   value={values.email}
                   onChange={handleChange}
-                  isValid={touched.email && !errors.email}
                   isInvalid={!!errors.email}
+                  isValid={touched.email && !errors.email}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.email}
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group as={Col} controlId="formGridPhone">
                 <Form.Label>Phone</Form.Label>
@@ -85,6 +87,9 @@ const CheckoutForm = () => {
                   isInvalid={!!errors.phone}
                   isValid={touched.phone && !errors.phone}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.phone}
+                </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
           </fieldset>
@@ -105,6 +110,9 @@ const CheckoutForm = () => {
                   isInvalid={!!errors.firstName}
                   isValid={touched.firstName && !errors.firstName}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.firstName}
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridLastName">
@@ -119,6 +127,9 @@ const CheckoutForm = () => {
                   isInvalid={!!errors.lastName}
                   isValid={touched.lastName && !errors.lastName}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.lastName}
+                </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
 
@@ -133,6 +144,9 @@ const CheckoutForm = () => {
                 isInvalid={!!errors.address}
                 isValid={touched.address && !errors.address}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.address}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="formGridAddress2">
@@ -146,6 +160,9 @@ const CheckoutForm = () => {
                 isInvalid={!!errors.address2}
                 isValid={touched.address2 && !errors.address2}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.address2}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Row>
@@ -160,6 +177,9 @@ const CheckoutForm = () => {
                   isInvalid={!!errors.town}
                   isValid={touched.town && !errors.town}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.town}
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridCounty">
@@ -182,6 +202,9 @@ const CheckoutForm = () => {
                   <option value="Nyeri">Nyeri</option>
                   <option value="Mombasa">Mombasa</option>
                 </Form.Control>
+                <Form.Control.Feedback type="invalid">
+                  {errors.county}
+                </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
 
@@ -202,7 +225,7 @@ const CheckoutForm = () => {
             variant="primary"
             type="submit"
             className="rounded"
-            disabled= {isSubmitting || Object.keys(errors).length !== 0}
+            disabled={isSubmitting || Object.keys(errors).length !== 0}
           >
             Continue to Payment
           </Button>
