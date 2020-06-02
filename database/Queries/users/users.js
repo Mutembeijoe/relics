@@ -11,7 +11,7 @@ export const createUser = async (user) => {
 };
 
 export const getUserByEmail = async (email) => {
-  return await knex("users").first("email", "password").where("email", email);
+  return await knex("users").first("email", "password", "username").where("email", email);
 };
 
 export const verifyEmailExists = async (email) => {
