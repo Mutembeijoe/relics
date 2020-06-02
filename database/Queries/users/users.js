@@ -10,8 +10,8 @@ export const createUser = async (user) => {
     .returning("id");
 };
 
-const getUserByEmail = async (email) => {
-  return await knex("users").first("email").where("email", email);
+export const getUserByEmail = async (email) => {
+  return await knex("users").first("email", "password").where("email", email);
 };
 
 export const verifyEmailExists = async (email) => {
