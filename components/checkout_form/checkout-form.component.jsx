@@ -55,7 +55,7 @@ const CheckoutForm = () => {
         isValid,
         isSubmitting,
       }) => (
-        <Form noValidate onSubmit={handleSubmit}>
+        <Form noValidate onSubmit={handleSubmit} className="mx-2">
           {/* Contacts Section */}
           <fieldset className="my-3">
             <legend>Contact Information</legend>

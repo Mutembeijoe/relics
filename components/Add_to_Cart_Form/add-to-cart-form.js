@@ -7,25 +7,28 @@ import { Formik } from "formik";
 import { connect } from "react-redux";
 import { addItemToCart } from "../../redux/cart/actions";
 
-const AddToCart = ({ product, addToCart }) =>  {
+const AddToCart = ({ product, addToCart }) => {
   const schema = yup.object({
     quantity: yup
       .number()
       .required("Quantity is required")
       .min(1, "Enter a Quantity of one or more"),
-    size: yup.string().oneOf(product.options.sizes).required("You must select a size"),
+    size: yup
+      .string()
+      .oneOf(product.options.sizes)
+      .required("You must select a size"),
   });
   return (
     <Formik
       validationSchema={schema}
-      onSubmit={(value, actions)=>{
+      onSubmit={(value, actions) => {
         const cartItem = {
           ...product,
-          ...value
-        }
-        addToCart(cartItem)
-        actions.setSubmitting(false)
-        actions.resetForm()
+          ...value,
+        };
+        addToCart(cartItem);
+        actions.setSubmitting(false);
+        actions.resetForm();
       }}
       initialValues={{
         quantity: 1,
@@ -48,7 +51,10 @@ const AddToCart = ({ product, addToCart }) =>  {
             className="mb-0"
             style={{ visibility: `${!isValid ? "visible" : "hidden"}` }}
           >
-            <ul className="mb-0">{Object.keys(errors).map((key) => (<li key={key}>{errors[key]}</li>))}
+            <ul className="mb-0">
+              {Object.keys(errors).map((key) => (
+                <li key={key}>{errors[key]}</li>
+              ))}
             </ul>
           </Alert>
           <Form.Row>
@@ -109,10 +115,10 @@ const AddToCart = ({ product, addToCart }) =>  {
       )}
     </Formik>
   );
-}
+};
 
-const mapDispatchToProps = dispatch => ({
-    addToCart : (item) => dispatch(addItemToCart(item))
-})
+const mapDispatchToProps = (dispatch) => ({
+  addToCart: (item) => dispatch(addItemToCart(item)),
+});
 
 export default connect(null, mapDispatchToProps)(AddToCart);
