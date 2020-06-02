@@ -1,5 +1,6 @@
 import cn from "classnames";
 import Button from "react-bootstrap/Button";
+import Link from "next/link";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -130,11 +131,12 @@ const Cart = (props) => {
               </div>
             </div>
             <div className="my-3">
-              <Button className="rounded" variant="primary" size="lg" block>
-                CheckOut
-                <i className="mdi mdi-arrow-right-bold mx-1" />
-              </Button>
-
+              <Link href="/checkout" passHref>
+                  <Button className="rounded" variant="primary" size="lg" block>
+                    CheckOut
+                    <i className="mdi mdi-arrow-right-bold mx-1" />
+                  </Button>
+              </Link>
               <Button
                 onClick={() => toggleCartOpen(!cartOpen)}
                 className="rounded mx-1"
@@ -149,18 +151,18 @@ const Cart = (props) => {
           </>
         ) : (
           <div className="d-flex flex-column justify-content-center align-items-center">
-          <i className="mdi mdi-emoticon-sad mdi-48px"/>
-          <p className="mt-3">Your Cart has no Items</p>
-          <Button
-                onClick={() => toggleCartOpen(!cartOpen)}
-                className="rounded mx-1"
-                variant="outline-primary"
-                size="lg"
-                block
-              >
-                <i className="mdi mdi-arrow-left-bold mx-1" />
-                Start shopping
-              </Button>
+            <i className="mdi mdi-emoticon-sad mdi-48px" />
+            <p className="mt-3">Your Cart has no Items</p>
+            <Button
+              onClick={() => toggleCartOpen(!cartOpen)}
+              className="rounded mx-1"
+              variant="outline-primary"
+              size="lg"
+              block
+            >
+              <i className="mdi mdi-arrow-left-bold mx-1" />
+              Start shopping
+            </Button>
           </div>
         )}
       </div>
