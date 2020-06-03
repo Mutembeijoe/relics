@@ -8,14 +8,14 @@ import { userSelector } from "../../redux/user/selectors";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-const Checkout = ({ cartItems,cartTotal, user }) => {
-  const router = useRouter()
- 
+const Checkout = ({ cartItems, cartTotal, user }) => {
+  const router = useRouter();
+
   useEffect(() => {
-    if (!user.token){
-      router.push("/auth/login")
+    if (!user.token) {
+      router.push("/auth/login");
     }
-  })
+  });
 
   return (
     <Layout>
@@ -40,7 +40,7 @@ const Checkout = ({ cartItems,cartTotal, user }) => {
                       <tr>
                         <td className="py-3">
                           <div className="d-flex flex-row">
-                            <div style={{width:"50px", height:"50px"}}>
+                            <div style={{ width: "50px", height: "50px" }}>
                               <img
                                 src={item.img_url}
                                 alt=""
@@ -64,15 +64,21 @@ const Checkout = ({ cartItems,cartTotal, user }) => {
                     );
                   })}
                   <tr>
-                    <td colSpan={2} className="text-right font-weight-bold">Subtotal</td>
+                    <td colSpan={2} className="text-right font-weight-bold">
+                      Subtotal
+                    </td>
                     <td>{cartTotal}</td>
                   </tr>
                   <tr>
-                    <td colSpan={2} className="text-right font-weight-bold">Shipping</td>
+                    <td colSpan={2} className="text-right font-weight-bold">
+                      Shipping
+                    </td>
                     <td>200</td>
                   </tr>
                   <tr>
-                    <td colSpan={2} className="text-right font-weight-bold">Total</td>
+                    <td colSpan={2} className="text-right font-weight-bold">
+                      Total
+                    </td>
                     <td>KSh {cartTotal + 200}</td>
                   </tr>
                 </tbody>
@@ -87,8 +93,8 @@ const Checkout = ({ cartItems,cartTotal, user }) => {
 
 const mapStateToProps = createStructuredSelector({
   cartItems: cartItemsSelector,
-  cartTotal:cartTotalPrice,
-  user:userSelector
+  cartTotal: cartTotalPrice,
+  user: userSelector,
 });
 
 export default connect(mapStateToProps)(Checkout);

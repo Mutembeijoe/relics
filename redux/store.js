@@ -2,6 +2,8 @@ import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./root-reducer";
 import logger from "redux-logger";
 import { createWrapper } from "next-redux-wrapper";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const bindMiddleware = (middlewares) => {
   if (process.env.NODE_ENV !== "production") {
@@ -25,8 +27,23 @@ const reducer = (state, action) => {
   }
 };
 
-const initStore = () => {
-  return createStore(reducer, bindMiddleware([logger]));
+const initStore = ({ isServer }) => {
+  //If it's on server side, create a store simply
+  if (isServer) {
+    return createStore(reducer, bindMiddleware([logger]));
+  } else {
+    //If it's on client side, create a store with a persistability feature
+    const persistConfig = {
+      key: "root",
+      storage,
+      whitelist: ["cart", "user"],
+    };
+
+    const persistedReducer = persistReducer(persistConfig, reducer);
+    const store = createStore(persistedReducer, bindMiddleware([logger]));
+    store.__persistor = persistStore(store);
+    return store;
+  }
 };
 
 export const wrapper = createWrapper(initStore);

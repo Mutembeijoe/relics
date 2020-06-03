@@ -4,12 +4,16 @@ import "../styles/global.css";
 import App from "next/app";
 import React from "react";
 import { wrapper } from "../redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { useStore } from "react-redux";
 
-class WrappedApp extends App {
-  render() {
-    const { Component, pageProps } = this.props;
-    return <Component {...pageProps} />;
-  }
-}
+const WrappedApp = ({ Component, pageProps }) => {
+  const store = useStore();
+  return (
+    <PersistGate persistor={store.__persistor}>
+      <Component {...pageProps} />
+    </PersistGate>
+  );
+};
 
 export default wrapper.withRedux(WrappedApp);
