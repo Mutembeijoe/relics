@@ -1,16 +1,24 @@
 import Link from "next/link";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { useRouter } from "next/router";
-import styles from './header.module.scss'
+import styles from "./header.module.scss";
 import { connect } from "react-redux";
 import { cartItemsCount } from "../../redux/cart/selectors";
+import { userSelector } from "../../redux/user/selectors";
 
-const Header = ({toggleCartOpen, cartOpen, cartItemsCount}) => {
+const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, user }) => {
   const router = useRouter();
   const path = router.asPath;
+  console.log(user);
   return (
-    <Navbar className="border-bottom py-0 pr-0" bg="white" expand="lg" sticky="top">
+    <Navbar
+      className="border-bottom py-0 pr-0"
+      bg="white"
+      expand="lg"
+      sticky="top"
+    >
       <Link href="/" passHref>
         <Navbar.Brand>Relics</Navbar.Brand>
       </Link>
@@ -31,17 +39,45 @@ const Header = ({toggleCartOpen, cartOpen, cartItemsCount}) => {
             </Nav.Link>
           </Link>
         </Nav>
+
         <Nav>
-        {cartOpen ?
-          <div className={`${styles.closeIcon} text-primary p-3`} onClick={()=>toggleCartOpen(!cartOpen)}>
-            <i className="mdi mdi-close mdi-36px "></i>
-          </div>
-          :
-          <div className={`${styles.cartIcon} text-primary p-3`} onClick={()=>toggleCartOpen(!cartOpen)}>
-            <i className="mdi mdi-cart mdi-36px "></i>
-            <span className="">{cartItemsCount}</span>
-          </div>
-        }
+          {!user.token ? (
+            <Link href="/auth/login" passHref>
+              <Nav.Link className={path == "/auth/login" ? "active" : ""}>
+                Login
+              </Nav.Link>
+            </Link>
+          ) : (
+            <NavDropdown title={user.username} id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">my orders</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Saved Cart
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                logout
+              </NavDropdown.Item>
+            </NavDropdown>
+          )}
+        </Nav>
+
+        <Nav>
+          {cartOpen ? (
+            <div
+              className={`${styles.closeIcon} text-primary p-3`}
+              onClick={() => toggleCartOpen(!cartOpen)}
+            >
+              <i className="mdi mdi-close mdi-36px "></i>
+            </div>
+          ) : (
+            <div
+              className={`${styles.cartIcon} text-primary p-3`}
+              onClick={() => toggleCartOpen(!cartOpen)}
+            >
+              <i className="mdi mdi-cart mdi-36px "></i>
+              <span className="">{cartItemsCount}</span>
+            </div>
+          )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
@@ -49,7 +85,8 @@ const Header = ({toggleCartOpen, cartOpen, cartItemsCount}) => {
 };
 
 const mapStateToProps = (state) => ({
-  cartItemsCount: cartItemsCount(state)
-})
+  cartItemsCount: cartItemsCount(state),
+  user: userSelector(state),
+});
 
 export default connect(mapStateToProps)(Header);

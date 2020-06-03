@@ -1,0 +1,9 @@
+.invalidResponse{
+    color:#FC3939;
+    text-align: center;
+    display:none;
+
+    &.active{
+        display:block;
+    }
+}
