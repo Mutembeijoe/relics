@@ -6,3 +6,7 @@ export const login = (user) => ({
         ...user
     }
 }) 
+
+export const logout = () => ({
+    type:userActionTypes.LOGOUT
+})

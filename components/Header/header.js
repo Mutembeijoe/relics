@@ -7,8 +7,9 @@ import styles from "./header.module.scss";
 import { connect } from "react-redux";
 import { cartItemsCount } from "../../redux/cart/selectors";
 import { userSelector } from "../../redux/user/selectors";
+import { logout } from "../../redux/user/actions";
 
-const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, user }) => {
+const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, user, logout }) => {
   const router = useRouter();
   const path = router.asPath;
   console.log(user);
@@ -50,13 +51,9 @@ const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, user }) => {
           ) : (
             <NavDropdown title={user.username} id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">my orders</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Saved Cart
-              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Saved Cart</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                logout
-              </NavDropdown.Item>
+              <span className="dropdown-item" onClick={logout}>Logout</span>
             </NavDropdown>
           )}
         </Nav>
@@ -89,4 +86,8 @@ const mapStateToProps = (state) => ({
   user: userSelector(state),
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch) => ({
+  logout:()=> dispatch(logout())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
