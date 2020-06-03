@@ -4,8 +4,19 @@ import CheckoutForm from "../../components/checkout_form/checkout-form.component
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { cartItemsSelector, cartTotalPrice } from "../../redux/cart/selectors";
+import { userSelector } from "../../redux/user/selectors";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-const Checkout = ({ cartItems,cartTotal }) => {
+const Checkout = ({ cartItems,cartTotal, user }) => {
+  const router = useRouter()
+ 
+  useEffect(() => {
+    if (!user.token){
+      router.push("/auth/login")
+    }
+  })
+
   return (
     <Layout>
       <div className="container">
@@ -76,7 +87,8 @@ const Checkout = ({ cartItems,cartTotal }) => {
 
 const mapStateToProps = createStructuredSelector({
   cartItems: cartItemsSelector,
-  cartTotal:cartTotalPrice
+  cartTotal:cartTotalPrice,
+  user:userSelector
 });
 
 export default connect(mapStateToProps)(Checkout);
