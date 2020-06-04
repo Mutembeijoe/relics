@@ -1,40 +1,54 @@
 import bcrypt from "bcrypt";
 import _ from "lodash";
-import { userSchema } from "../../../database/Queries/users/schema";
 import {
   createUser,
   verifyEmailExists,
 } from "../../../database/Queries/users/users";
+import { sendError } from "../../../utils/api_utils";
 
 export default async (req, res) => {
-  const { error, value } = userSchema.validate(req.body);
+  const user = _.pick(req.body, ["username", "email", "password"]);
 
-  if (error) {
-    return res.status(400).json(error);
+  // Verify that a user with sent email doesn't exist already
+  try {
+    const userExists = await verifyEmailExists(user.email);
+    if (userExists) {
+      sendError(res, {
+        status: 400,
+        message: "An account with the provided email already exists",
+        label: "email",
+      });
+      return;
+    }
+  } catch (error) {
+    sendError();
+    return;
   }
 
-  const user = _.pick(value, ["username", "email", "password"]);
-
-  const salt = await bcrypt.genSalt();
-  const hashed = await bcrypt.hash(value.password, salt);
-  user.password = hashed;
-
-  const userExists = await verifyEmailExists(user.email);
-
-  if (userExists) {
-    return res.status(400).json({
-      error: "An account with the provided email already exists",
+  // Generate salt and hash password
+  try {
+    const salt = await bcrypt.genSalt();
+    const hashed = await bcrypt.hash(user.password, salt);
+    user.password = hashed;
+  } catch (error) {
+    sendError(res, {
+      status: 500,
+      message: "500 - Internal Server Error",
     });
+    return;
   }
 
+  // Create and Save User
   try {
     const id = await createUser(user);
     return res.status(200).json({
       id,
     });
   } catch (error) {
-    return res.status(500).json({
-      error,
+    sendError(res, {
+      status: 500,
+      message: "500 - Internal Server Error",
     });
+    return;
   }
 };
