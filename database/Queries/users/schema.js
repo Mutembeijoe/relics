@@ -1,23 +1,17 @@
-import Joi from "@hapi/joi";
+import * as yup from "yup";
 
-export const userSchema = Joi.object({
-  username: Joi.string().alphanum().min(3).max(30).required(),
-  password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")).required(),
-  repeat_password: Joi.ref("password"),
-  email: Joi.string()
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net"] },
-    })
+export const userSchema = yup.object({
+  username: yup.string().min(3).max(20).required(),
+  password: yup
+    .string()
+    .matches(
+      new RegExp("^[a-zA-Z0-9]{5,30}$"),
+      "passwords can only contain lowercase, uppercase letters, numbers and must be at least 5 characters long"
+    )
     .required(),
-}).with("password", "repeat_password");
-
-export const loginSchema = Joi.object({
-  email: Joi.string()
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net"] },
-    })
-    .required(),
-  password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")).required(),
+  repeat_password: yup
+    .string()
+    .oneOf([yup.ref("password")], "passwords do not match")
+    .required("Repeat Password is Required"),
+  email: yup.string().email().required(),
 });
