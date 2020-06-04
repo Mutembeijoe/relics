@@ -1,30 +1,42 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import _ from 'lodash';
-import { loginSchema } from "../../../database/Queries/users/schema";
+import _ from "lodash";
 import { getUserByEmail } from "../../../database/Queries/users/users";
+import { sendError } from "../../../utils/api_utils";
 
 export default async (req, res) => {
-  const { error, value } = loginSchema.validate(req.body);
+  const { email, password } = req.body;
 
-  if (error) return res.status(400).json({ error });
-
-  let user = await getUserByEmail(value.email);
+  let user = await getUserByEmail(email);
 
   if (!user)
-    return res.status(400).json({ error: "Invalid email or password" });
+    return sendError(res, {
+      message: "Invalid email or password",
+      status: 400,
+    });
 
-  const isPasswordValid = await bcrypt.compare(value.password, user.password);
+  const isPasswordValid = await bcrypt.compare(password, user.password);
 
   if (!isPasswordValid)
-    return res.status(400).json({ error: "Invalid email or password" });
+    return sendError(res, {
+      message: "Invalid email or password",
+      status: 400,
+    });
 
-  const token = await jwt.sign({ email: user.email }, process.env.PRIVATE_KEY);
+  try {
+    const token = await jwt.sign(
+      { email: user.email },
+      process.env.PRIVATE_KEY
+    );
+    user = _.pick(user, ["username", "email"]);
 
-  user = _.pick(user,["username", "email"])
-
-  res.json({
-    ...user,
-    token
-  });
+    res.json({
+      ...user,
+      token,
+    });
+    return;
+  } catch (error) {
+    sendError(res, { status: 500, message: "500- Internal Server Error" });
+    return
+  }
 };
