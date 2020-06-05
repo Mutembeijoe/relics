@@ -7,6 +7,7 @@ import { cartItemsSelector, cartTotalPrice } from "../../redux/cart/selectors";
 import { userSelector } from "../../redux/user/selectors";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Head from "next/head";
 
 const Checkout = ({ cartItems, cartTotal, user }) => {
   const router = useRouter();
@@ -19,6 +20,12 @@ const Checkout = ({ cartItems, cartTotal, user }) => {
 
   return (
     <Layout>
+    <Head>
+        <title>
+          Shipping | Relics{" "}
+        </title>
+        <meta name="description" content="Fill in the Shipping Details and have Nairobi's finest branded fashion delivered to your door step"/>
+      </Head>
       <div className="container">
         <div className="row">
           <div className="col-md-7">

@@ -8,7 +8,11 @@ export default function Home() {
   return (
     <Layout>
       <Head>
-        <title>Home | Relics </title>
+        <title>Relics | Nairobi's Online Store for Branded Fashion</title>
+        <meta
+          name="description"
+          content="Nairobi's Online Shopping Store for Cool Branded Fashion items for movie fans and nerds. Delivered at your Door step!"
+        />
       </Head>
       <div>
         <div className={styles.sidebar}>

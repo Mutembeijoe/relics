@@ -1,14 +1,22 @@
 import Link from "next/link";
 import Button from "react-bootstrap/Button";
 import Layout from "../../components/Layout/layout";
-// import { getAllProductSlugs, getProductBySlug } from "../../libs/knex";
 import styles from "../../styles/product_page.module.scss";
 import AddToCart from "../../components/Add_to_Cart_Form/add-to-cart-form";
-import { getProductBySlug, getAllProductSlugs } from "../../database/Queries/product";
+import {
+  getProductBySlug,
+  getAllProductSlugs,
+} from "../../database/Queries/product";
+import Head from "next/head";
 
 export default function Product({ product }) {
+  console.log(product);
   return (
     <Layout>
+      <Head>
+        <title>{product.category_name} | {product.product_name} </title>
+        <meta name="description" content={product.description} />
+      </Head>
       <div className="container">
         <div className={styles.layout}>
           <div>
@@ -17,7 +25,10 @@ export default function Product({ product }) {
             </div>
           </div>
           <div className={`${styles.sideCard} px-3`}>
-            <Link href="/category/[slug]" as={`/category/${product.category_slug}`}>
+            <Link
+              href="/category/[slug]"
+              as={`/category/${product.category_slug}`}
+            >
               <a>
                 <Button variant="outline-primary rounded mb-3" size="lg">
                   <i className="mdi mdi-arrow-left-bold mr-2"></i>
@@ -63,7 +74,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const product = await getProductBySlug(params.slug);
-  console.log(product)
+  console.log(product);
   return {
     props: {
       product: product,

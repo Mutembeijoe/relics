@@ -15,6 +15,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { selectPreviousRoute } from "../../redux/route/selectors";
 import { deletePreviousRoute } from "../../redux/route/actions";
+import Head from "next/head";
 
 const SignIn = ({ loginUser, previousRoute, deletePreviousRoute }) => {
   const router = useRouter();
@@ -29,6 +30,12 @@ const SignIn = ({ loginUser, previousRoute, deletePreviousRoute }) => {
 
   return (
     <Layout>
+      <Head>
+        <title>
+          Sign In | Relics{" "}
+        </title>
+        <meta name="description" content="Sign In to your account and Order Online Now" />
+      </Head>
       <div className="container">
         <Alert
           variant="danger"
@@ -61,7 +68,7 @@ const SignIn = ({ loginUser, previousRoute, deletePreviousRoute }) => {
                   //redirect user accordingly
 
                   if (previousRoute === "/auth/signup") {
-                    deletePreviousRoute()
+                    deletePreviousRoute();
                     router.push("/");
                   } else {
                     router.back();
@@ -147,7 +154,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   loginUser: (user) => dispatch(login(user)),
-  deletePreviousRoute: () => dispatch(deletePreviousRoute())
+  deletePreviousRoute: () => dispatch(deletePreviousRoute()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

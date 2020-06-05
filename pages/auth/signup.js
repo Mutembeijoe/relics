@@ -12,6 +12,7 @@ import { Formik } from "formik";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { saveCurrentRoute } from "../../redux/route/actions";
+import Head from "next/head";
 
 const SignUp = ({ saveCurrentRoute }) => {
   const router = useRouter();
@@ -20,6 +21,12 @@ const SignUp = ({ saveCurrentRoute }) => {
 
   return (
     <Layout>
+    <Head>
+        <title>
+          Sign Up | Relics{" "}
+        </title>
+        <meta name="description" content="Create a Relics Account and start ordering your cool Branded fashion"/>
+      </Head>
       <div className="container">
         <Alert
           variant="danger"

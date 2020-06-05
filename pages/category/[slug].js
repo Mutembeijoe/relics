@@ -3,10 +3,21 @@ import ProductCardDisplay from "../../components/product-card-display/product-ca
 import utilsStyles from "../../styles/utils.module.css";
 import { getAllCategorySlugs } from "../../database/Queries/category";
 import { getAllProductsInCategory } from "../../database/Queries/product";
+import Head from "next/head";
 
-export default function Category({ products}) {
+export default function Category({ products, slug }) {
+  console.log(slug);
   return (
     <Layout>
+      <Head>
+        <title>
+          Category | {slug} - Cool Branded {slug}
+        </title>
+        <meta
+          name="description"
+          content={`Beautiful Branded ${slug}'s for cool people`}
+        />
+      </Head>
       <div className="container">
         <div className={utilsStyles.custom_flex_row}>
           {products.map((product) => {
@@ -19,9 +30,9 @@ export default function Category({ products}) {
 }
 
 export async function getStaticPaths() {
-  const slugs = await getAllCategorySlugs()
+  const slugs = await getAllCategorySlugs();
   const paths = slugs.map((slug) => {
-    return { params: { slug:slug.category_slug } };
+    return { params: { slug: slug.category_slug } };
   });
   return {
     paths,
@@ -30,10 +41,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const products = await getAllProductsInCategory(params.slug)
+  const products = await getAllProductsInCategory(params.slug);
   return {
     props: {
       products,
+      slug: params.slug,
     },
   };
 }

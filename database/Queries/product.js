@@ -14,6 +14,7 @@ export async function getProductBySlug(slug) {
       "description",
       "img_url",
       "category_slug",
+      "category_name",
       "options"
     )
     .where({ product_slug: slug })
