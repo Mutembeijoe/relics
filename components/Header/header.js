@@ -16,8 +16,8 @@ const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, user, logout }) => {
   console.log(user);
   return (
     <Navbar
-      className="border-bottom py-0 pr-0"
-      bg="white"
+      className={`border-bottom py-0 pr-0 ${styles.navbar}`}
+      // bg="white"
       expand="lg"
       sticky="top"
     >
