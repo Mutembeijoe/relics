@@ -22,8 +22,12 @@ $pulse-secondary-color:#A991D4;
         font-weight: bold;
         border-radius: 50%;
         font-size: 13px;
-        
+
+        &.hidden{
+            visibility: hidden;
+        }
     }
+    
 
     &:hover{
         border:1px solid $pulse-dark-yellow

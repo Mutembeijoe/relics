@@ -3,6 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useRouter } from "next/router";
+import cn from 'classnames'
 import styles from "./header.module.scss";
 import { connect } from "react-redux";
 import { cartItemsCount } from "../../redux/cart/selectors";
@@ -72,7 +73,7 @@ const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, user, logout }) => {
               onClick={() => toggleCartOpen(!cartOpen)}
             >
               <i className="mdi mdi-cart mdi-36px "></i>
-              <span className="">{cartItemsCount}</span>
+              <span className={cn({[styles.hidden]:cartItemsCount < 1})}>{cartItemsCount}</span>
             </div>
           )}
         </Nav>
