@@ -139,7 +139,7 @@ const Cart = (props) => {
               </Link>
               <Button
                 onClick={() => toggleCartOpen(!cartOpen)}
-                className="rounded mx-1"
+                className="rounded"
                 variant="outline-primary"
                 size="lg"
                 block
