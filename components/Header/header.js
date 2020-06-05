@@ -3,21 +3,28 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useRouter } from "next/router";
-import cn from 'classnames'
+import cn from "classnames";
 import styles from "./header.module.scss";
 import { connect } from "react-redux";
 import { cartItemsCount } from "../../redux/cart/selectors";
 import { userSelector } from "../../redux/user/selectors";
 import { logout } from "../../redux/user/actions";
+import { clearCart } from "../../redux/cart/actions";
 
-const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, user, logout }) => {
+const Header = ({
+  toggleCartOpen,
+  cartOpen,
+  cartItemsCount,
+  user,
+  logout,
+  clearCart,
+}) => {
   const router = useRouter();
   const path = router.asPath;
   console.log(user);
   return (
     <Navbar
       className={`border-bottom py-0 pr-0 ${styles.navbar}`}
-      // bg="white"
       expand="lg"
       sticky="top"
     >
@@ -54,7 +61,15 @@ const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, user, logout }) => {
               <NavDropdown.Item href="#action/3.1">my orders</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Saved Cart</NavDropdown.Item>
               <NavDropdown.Divider />
-              <span className="dropdown-item" onClick={logout}>Logout</span>
+              <span
+                className="dropdown-item"
+                onClick={() => {
+                  logout();
+                  clearCart();
+                }}
+              >
+                Logout
+              </span>
             </NavDropdown>
           )}
         </Nav>
@@ -73,7 +88,9 @@ const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, user, logout }) => {
               onClick={() => toggleCartOpen(!cartOpen)}
             >
               <i className="mdi mdi-cart mdi-36px "></i>
-              <span className={cn({[styles.hidden]:cartItemsCount < 1})}>{cartItemsCount}</span>
+              <span className={cn({ [styles.hidden]: cartItemsCount < 1 })}>
+                {cartItemsCount}
+              </span>
             </div>
           )}
         </Nav>
@@ -88,7 +105,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  logout:()=> dispatch(logout())
-})
+  logout: () => dispatch(logout()),
+  clearCart: () => dispatch(clearCart()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
