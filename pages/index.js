@@ -27,7 +27,7 @@ export default function Home() {
           <h1 className="font-weight-bold">Get Some Relics Swag!</h1>
           <p>We have a collection of branded items that are a must have!</p>
           <p>Check out the links below and find your relic</p>
-          <div className="animated infinite bounce delay-2s">
+          <div className="animated infinite bounce delay-1s slow">
             <i
               className="mdi mdi-hand-pointing-right mdi-36px my-3 text-primary"
               style={{ transform: "rotate(90deg)" }}
