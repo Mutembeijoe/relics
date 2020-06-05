@@ -7,6 +7,7 @@ $pulse-secondary-color:#A991D4;
   height: 100vh;
   overflow-y:scroll;
   width: 380px;
+  // width: 18rem;
   position: fixed;
   top: 0;
   right: 0px;
@@ -122,6 +123,16 @@ $pulse-secondary-color:#A991D4;
           }
         }
       }
+    }
+  }
+  width: 100%;
+}
+
+@media(max-width:768px){
+  .cart{
+    width:100%;
+    &.cartCollapsed {
+      right: -768px;
     }
   }
 }

@@ -30,7 +30,7 @@ const Cart = (props) => {
     decreaseItem,
   } = props;
   return (
-    <div className={cn(styles.cart, { [styles.cartCollapsed]: !cartOpen })}>
+    <div className={`${cn(styles.cart, { [styles.cartCollapsed]: !cartOpen })}`}>
       <div
         className={`${styles.header} sticky-top bg-white border-bottom border-left mb-4`}
       >
@@ -132,10 +132,10 @@ const Cart = (props) => {
             </div>
             <div className="my-3">
               <Link href="/checkout" passHref>
-                  <Button className="rounded" variant="primary" size="lg" block>
-                    CheckOut
-                    <i className="mdi mdi-arrow-right-bold mx-1" />
-                  </Button>
+                <Button className="rounded" variant="primary" size="lg" block>
+                  CheckOut
+                  <i className="mdi mdi-arrow-right-bold mx-1" />
+                </Button>
               </Link>
               <Button
                 onClick={() => toggleCartOpen(!cartOpen)}

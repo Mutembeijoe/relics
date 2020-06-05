@@ -21,7 +21,6 @@ const Header = ({
 }) => {
   const router = useRouter();
   const path = router.asPath;
-  console.log(user);
   return (
     <Navbar
       className={`border-bottom py-0 pr-0 ${styles.navbar}`}

@@ -30,3 +30,11 @@ $pulse_light_grey:#E5E5E5;
         }
     }
 }
+
+@media(max-width:768px){
+    .container{
+        &.containerCollapsed{
+            right:768px;
+        }
+    }
+  }
