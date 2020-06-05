@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
 import Card from "react-bootstrap/Card";
-import ProgressBar from "react-bootstrap/ProgressBar";
 import Layout from "../components/Layout/layout";
 import styles from "../styles/home_page.module.scss";
 
@@ -11,60 +10,71 @@ export default function Home() {
       <Head>
         <title>Home | Relics </title>
       </Head>
-      <div className="container text-center">
-        <h5 className="text-primary">This site is Under construction</h5>
-        <div className={`${styles.progressBox} my-4`}>
-          <ProgressBar
-            className={styles.progressBar}
-            variant="primary"
-            now={15}
-            label={`15%`}
-            animated
-          />
+      <div>
+        <div className={styles.sidebar}>
+          <div></div>
+          <div className={`${styles.rotatedText}`}>Relics Swag</div>
+          <div className={styles.emoticon} style={{ color: "#facc00" }}>
+            <i className="mdi mdi-emoticon-cool mdi-48px"></i>
+          </div>
         </div>
+        <div className="container">
+          <div className="text-center">
+            <h1>Get Some Relics Swag!</h1>
+            <p>We have a collection of branded items that are a must have!</p>
+            <p>Check out the links below and find your relic</p>
+            <div className="animated infinite bounce delay-2s">
+              <i
+                className="mdi mdi-hand-pointing-right mdi-36px my-3 text-primary"
+                style={{ transform: "rotate(90deg)" }}
+              ></i>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <Link href="/category/[slug]" as={`/category/tees`}>
+              <a>
+                <Card
+                  className={`${styles.card} shadow mx-3 mb-5 bg-white rounded`}
+                >
+                  <div className={`${styles.cardImgBox}`}>
+                    <img
+                      src="/categories/t-shirt.png"
+                      className={`${styles.cardImg}`}
+                      alt="tshirt"
+                    />
+                  </div>
 
-        <div>
-          <div className={styles.cardDisplay}>
-            <Card
-              style={{ width: "18rem" }}
-              className="p-3 rounded shadow p-3 mb-5 bg-white rounded mx-3"
-            >
-              <Card.Img
-                variant="top"
-                src="/categories/t-shirt.png"
-                className="img-fluid"
-              />
-              <Card.Body>
-                <Link href="/category/[slug]" as={`/category/tees`}>
-                  <a>
-                    <Card.Title className="text-primary font-weight-bold">
+                  <Card.Body className={`${styles.cardBody}`}>
+                    <Card.Title className="text-primary">
                       <span className="mx-2">T-Shirts</span>
                       <i className="mdi mdi-arrow-right-bold" />
                     </Card.Title>
-                  </a>
-                </Link>
-              </Card.Body>
-            </Card>
-            <Card
-              style={{ width: "18rem" }}
-              className="p-3 rounded shadow p-3 mb-5 bg-white rounded mx-3"
-            >
-              <Card.Img
-                variant="top"
-                src="/categories/hoodie.png"
-                className="img-fluid"
-              />
-              <Card.Body>
-                <Link href="/category/[slug]" as={`/category/hoodies`}>
-                  <a>
-                    <Card.Title className="text-primary font-weight-bold">
+                  </Card.Body>
+                </Card>
+              </a>
+            </Link>
+            <Link href="/category/[slug]" as={`/category/hoodies`}>
+              <a>
+                <Card
+                  className={`${styles.card} shadow mx-3 mb-5 bg-white rounded`}
+                >
+                  <div className={`${styles.cardImgBox}`}>
+                    <img
+                      src="/categories/hoodie.png"
+                      className={`${styles.cardImg}`}
+                      alt="hoodie"
+                    />
+                  </div>
+
+                  <Card.Body className={`${styles.cardBody}`}>
+                    <Card.Title className="text-primary">
                       <span className="mx-2">Hoodies</span>
                       <i className="mdi mdi-arrow-right-bold" />
                     </Card.Title>
-                  </a>
-                </Link>
-              </Card.Body>
-            </Card>
+                  </Card.Body>
+                </Card>
+              </a>
+            </Link>
           </div>
         </div>
       </div>

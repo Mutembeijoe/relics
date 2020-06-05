@@ -1,15 +1,62 @@
-.cardDisplay{
-    display: flex;
-    justify-content: space-evenly;
+$pulse-light-yellow: #f8f31d;
+$pulse-dark-yellow: #facc00;
+$pulse-primary-color: #593196;
+$pulse-secondary-color: #a991d4;
+
+.card {
+  width: 18rem;
+  overflow: hidden;
 }
 
-.progressBox{
-    display: flex;
-    justify-content: center;
-    width: 100%;
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+
+  &:hover {
+    background-color: #fbf9fc;
+  }
 }
 
-.progressBar{
-    height:30px;
-    width:18rem;
+.cardImgBox {
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 18rem;
+  width: 18rem;
+}
+.cardImg {
+  max-width: 80%;
+  height: auto;
+  &:hover {
+    transform: scale(1.04);
+    transition: transform 0.1s;
+  }
+}
+
+.sidebar {
+  background-color: $pulse-primary-color;
+  position: fixed;
+  height: 100%;
+  width: 60px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  .rotatedText {
+    color: white;
+    font-size: 2rem;
+    transform: rotate(-180deg);
+    writing-mode: vertical-rl;
+  }
+}
+
+
+@media(max-width:768px){
+    .sidebar{
+        display: none;
+    }
 }

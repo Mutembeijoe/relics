@@ -1,6 +1,7 @@
 import "../styles/bootstrap.min.css";
 import "../styles/icons/material-design/css/materialdesignicons.min.css";
 import "../styles/global.css";
+import "../node_modules/animate.css/animate.min.css"
 import App from "next/app";
 import React from "react";
 import { wrapper } from "../redux/store";
