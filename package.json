@@ -1,5 +1,8 @@
 {
   "name": "relics",
+  "maintainers": [
+    "<Ndirangu Joe> @ joe.drango@gmail.com"
+  ],
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,7 +11,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@hapi/joi": "^17.1.1",
     "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
     "classnames": "^2.2.6",
