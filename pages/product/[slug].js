@@ -17,7 +17,7 @@ export default function Product({ product }) {
         <title>{product.category_name} | {product.product_name} </title>
         <meta name="description" content={product.description} />
       </Head>
-      <div className="container">
+      <div className="container my-4">
         <div className={styles.layout}>
           <div>
             <div className={`${styles.card} shadow p-3 mb-5 bg-white rounded`}>

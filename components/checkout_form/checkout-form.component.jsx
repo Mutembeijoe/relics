@@ -57,7 +57,7 @@ const CheckoutForm = () => {
       }) => (
         <Form noValidate onSubmit={handleSubmit} className="mx-2">
           {/* Contacts Section */}
-          <fieldset className="my-3">
+          <fieldset>
             <legend>Contact Information</legend>
             <Form.Row>
               <Form.Group as={Col} controlId="formGridEmailAddress">

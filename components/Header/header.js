@@ -28,7 +28,7 @@ const Header = ({
       sticky="top"
     >
       <Link href="/" passHref>
-        <Navbar.Brand>Relics</Navbar.Brand>
+        <Navbar.Brand className="font-weight-bold">Relics</Navbar.Brand>
       </Link>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

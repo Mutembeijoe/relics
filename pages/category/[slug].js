@@ -18,7 +18,7 @@ export default function Category({ products, slug }) {
           content={`Beautiful Branded ${slug}'s for cool people`}
         />
       </Head>
-      <div className="container">
+      <div className="container my-4">
         <div className={utilsStyles.custom_flex_row}>
           {products.map((product) => {
             return <ProductCardDisplay key={product.id} item={product} />;

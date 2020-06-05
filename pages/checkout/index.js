@@ -26,25 +26,25 @@ const Checkout = ({ cartItems, cartTotal, user }) => {
         </title>
         <meta name="description" content="Fill in the Shipping Details and have Nairobi's finest branded fashion delivered to your door step"/>
       </Head>
-      <div className="container">
+      <div className="container my-4">
         <div className="row">
           <div className="col-md-7">
             <CheckoutForm />
           </div>
-          <div className="col-md-5 border-left">
+          <div className="col-md-5 border-left my-4">
             <div className="container">
               <Table hover>
                 <thead>
                   <tr>
-                    <th>Product</th>
-                    <th>Qty</th>
-                    <th>Cost</th>
+                    <th className="border-top-0">Product</th>
+                    <th className="border-top-0">Qty</th>
+                    <th className="border-top-0">Cost</th>
                   </tr>
                 </thead>
                 <tbody className="border-bottom">
                   {cartItems.map((item) => {
                     return (
-                      <tr>
+                      <tr key={`${item.id}_${item.size}`}>
                         <td className="py-3">
                           <div className="d-flex flex-row">
                             <div style={{ width: "50px", height: "50px" }}>

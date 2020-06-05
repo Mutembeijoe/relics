@@ -17,7 +17,7 @@ const ProductCardDisplay = ({ item }) => (
         </div>
 
         <Card.Body className={`${productCardStyles.cardBody}`}>
-          <Card.Title className="text-primary">{item.product_name}</Card.Title>
+          <Card.Title className="text-primary font-weight-bold">{item.product_name}</Card.Title>
           <div className={productCardStyles.cardFooter}>
             <div className={productCardStyles.price}>
               <span className="text-muted">KSh</span>
