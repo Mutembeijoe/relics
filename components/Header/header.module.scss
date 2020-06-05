@@ -3,11 +3,11 @@ $pulse-dark-yellow: #facc00;
 $pulse-primary-color: #593196;
 $pulse-secondary-color: #a991d4;
 
-.navbar{
-    background-color: white;
-    background-color: rgba($color: #fff, $alpha: 0.8);
-    backdrop-filter: saturate(180%) blur(5px);
-    -webkit-backdrop-filter: saturate(180%) blur(5px);
+.navbar {
+  background-color: white;
+  background-color: rgba($color: #fff, $alpha: 0.8);
+  backdrop-filter: saturate(180%) blur(5px);
+  -webkit-backdrop-filter: saturate(180%) blur(5px);
 }
 
 .cartIcon {
@@ -50,6 +50,9 @@ $pulse-secondary-color: #a991d4;
 }
 
 @media (max-width: 992px) {
+  .navbar {
+    background-color: white;
+  }
   .cartIcon {
     span {
       left: 20px;
