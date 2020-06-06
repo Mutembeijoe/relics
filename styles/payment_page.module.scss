@@ -1,0 +1,10 @@
+.paymentOptions{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .mpesa{
+        width:100px;
+        height:auto;
+    }
+}
