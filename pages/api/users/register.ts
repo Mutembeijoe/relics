@@ -51,7 +51,7 @@ handler.post(async (req, res) => {
   // Create and Save User
   try {
     const id = await createUser(user);
-    logIn(req, id)
+    logIn(req, id[0])
     return res.status(200).json({
       id,
     });

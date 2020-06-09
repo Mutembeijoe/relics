@@ -1,49 +1,38 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import _ from "lodash";
 import { getUserByEmail } from "../../../database/Queries/users/users";
-import { sendError } from "../../../utils/api_utils";
-import { NextApiRequest, NextApiResponse } from "next";
+import { sendError, logIn } from "../../../utils/api_utils";
+import nc from "next-connect";
+import middlewares from "../../../utils/middlewares/common";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  switch (req.method) {
-    case "POST":
-      const { email, password } = req.body;
+const handler = nc();
 
-      let user = await getUserByEmail(email);
+handler.use(middlewares);
 
-      if (!user)
-        return sendError(res, {
-          message: "Invalid email or password",
-          status: 400,
-        });
+handler.post(async (req, res) => {
+  const { email, password } = req.body;
 
-      const isPasswordValid = await bcrypt.compare(password, user.password);
+  let user = await getUserByEmail(email);
 
-      if (!isPasswordValid)
-        return sendError(res, {
-          message: "Invalid email or password",
-          status: 400,
-        });
+  if (!user)
+    return sendError(res, {
+      message: "Invalid email or password",
+      status: 400,
+    });
 
-      try {
-        const token = await jwt.sign(
-          { email: user.email },
-          process.env.PRIVATE_KEY
-        );
-        user = _.pick(user, ["username", "email"]);
+  const isPasswordValid = await bcrypt.compare(password, user.password);
 
-        res.json({
-          ...user,
-          token,
-        });
-        return;
-      } catch (error) {
-        sendError(res, { status: 500, message: "500- Internal Server Error" });
-        return;
-      }
-    default:
-      res.setHeader("Allow", ["POST"]);
-      return res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
-};
+  if (!isPasswordValid)
+    return sendError(res, {
+      message: "Invalid email or password",
+      status: 400,
+    });
+
+  logIn(req, user.id);
+
+  res.json({
+    success: "OK",
+  });
+});
+
+export default handler;

@@ -8,6 +8,6 @@ export const sendError = (res, error: Error) => {
 };
 
 
-export const logIn = (req, userId:number[]) => {
-  req.session.userId = userId[0];
+export const logIn = (req, userId:number) => {
+  req.session.userId = userId;
 }
