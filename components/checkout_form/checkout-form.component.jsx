@@ -3,8 +3,11 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import * as yup from "yup";
 import { Formik } from "formik";
+import axios from "axios";
+import { useRouter } from "next/router";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ setError }) => {
+  const router = useRouter()
   const schema = yup.object({
     email: yup
       .string()
@@ -29,10 +32,19 @@ const CheckoutForm = () => {
   return (
     <Formik
       validationSchema={schema}
-      onSubmit={(value, actions) => {
-        console.log(value);
-        actions.resetForm();
-        actions.setSubmitting(false);
+      onSubmit={async (value, actions) => {
+        try {
+          await axios.post("/api/orders/create", {
+            ...value,
+          });
+          
+          // actions.resetForm();
+          actions.setSubmitting(false);
+          router.push("/checkout/payment")
+        } catch (error) {
+          const { message } = error.response.data;
+          setError(message);
+        }
       }}
       initialValues={{
         email: "",

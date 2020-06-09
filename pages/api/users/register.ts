@@ -24,7 +24,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           return;
         }
       } catch (error) {
-        sendError();
+        sendError(res, {
+          status: 500,
+          message: "500 - Internal Server Error",
+        });
         return;
       }
 

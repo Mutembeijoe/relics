@@ -8,8 +8,13 @@ import { userSelector } from "../../redux/user/selectors";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Head from "next/head";
+import styles from "../../styles/shipping.module.scss";
+import Alert from "react-bootstrap/Alert";
+import cn from "classnames";
+import { useState } from "react";
 
 const Checkout = ({ cartItems, cartTotal, user }) => {
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -20,16 +25,25 @@ const Checkout = ({ cartItems, cartTotal, user }) => {
 
   return (
     <Layout>
-    <Head>
-        <title>
-          Shipping | Relics{" "}
-        </title>
-        <meta name="description" content="Fill in the Shipping Details and have Nairobi's finest branded fashion delivered to your door step"/>
+      <Head>
+        <title>Shipping | Relics </title>
+        <meta
+          name="description"
+          content="Fill in the Shipping Details and have Nairobi's finest branded fashion delivered to your door step"
+        />
       </Head>
       <div className="container my-4">
+        <Alert
+          variant="danger"
+          className={`${cn(styles.alert, {
+            [styles.active]: error,
+          })} mx-auto text-center`}
+        >
+          {error}
+        </Alert>
         <div className="row">
           <div className="col-md-7">
-            <CheckoutForm />
+            <CheckoutForm setError={setError} />
           </div>
           <div className="col-md-5 border-left my-4">
             <div className="container">

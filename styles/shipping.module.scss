@@ -1,0 +1,8 @@
+.alert{
+    display:none;
+    max-width:28rem;
+
+    &.active{
+        display:block;
+    }
+}
