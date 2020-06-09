@@ -4,10 +4,14 @@ import {
   createUser,
   verifyEmailExists,
 } from "../../../database/Queries/users/users";
-import { sendError } from "../../../utils/api_utils";
+import { sendError, logIn } from "../../../utils/api_utils";
 import nc from "next-connect";
+import middlewares from "../../../utils/middlewares/common";
+
 
 const handler = nc();
+
+handler.use(middlewares)
 
 handler.post(async (req, res) => {
   const user = _.pick(req.body, ["username", "email", "password"]);
@@ -27,7 +31,7 @@ handler.post(async (req, res) => {
     sendError(res, {
       status: 500,
       message: "500 - Internal Server Error",
-    });
+    });  
     return;
   }
 
@@ -47,6 +51,7 @@ handler.post(async (req, res) => {
   // Create and Save User
   try {
     const id = await createUser(user);
+    logIn(req, id)
     return res.status(200).json({
       id,
     });

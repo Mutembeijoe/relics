@@ -6,3 +6,8 @@ export const sendError = (res, error: Error) => {
     label: "" || error.label,
   });
 };
+
+
+export const logIn = (req, userId:number[]) => {
+  req.session.userId = userId[0];
+}
