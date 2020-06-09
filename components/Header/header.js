@@ -7,19 +7,23 @@ import cn from "classnames";
 import styles from "./header.module.scss";
 import { connect } from "react-redux";
 import { cartItemsCount } from "../../redux/cart/selectors";
-import { userSelector } from "../../redux/user/selectors";
+// import { userSelector } from "../../redux/user/selectors";
 import { logout } from "../../redux/user/actions";
 import { clearCart } from "../../redux/cart/actions";
+
+import {useUser} from '../../utils/hooks';
 
 const Header = ({
   toggleCartOpen,
   cartOpen,
   cartItemsCount,
-  user,
+  // user,
   logout,
   clearCart,
 }) => {
   const router = useRouter();
+  const user = useUser();
+  console.log(user)
   const path = router.asPath;
   return (
     <Navbar
@@ -49,7 +53,7 @@ const Header = ({
         </Nav>
 
         <Nav>
-          {!user.token ? (
+          {!user ? (
             <Link href="/auth/login" passHref>
               <Nav.Link className={path == "/auth/login" ? "active" : ""}>
                 Login
@@ -100,7 +104,7 @@ const Header = ({
 
 const mapStateToProps = (state) => ({
   cartItemsCount: cartItemsCount(state),
-  user: userSelector(state),
+  // user: userSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
