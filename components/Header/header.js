@@ -4,27 +4,19 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useRouter } from "next/router";
 import cn from "classnames";
+import axios from "axios";
 import styles from "./header.module.scss";
 import { connect } from "react-redux";
 import { cartItemsCount } from "../../redux/cart/selectors";
-// import { userSelector } from "../../redux/user/selectors";
-import { logout } from "../../redux/user/actions";
+// import { logout } from "../../redux/user/actions";
 import { clearCart } from "../../redux/cart/actions";
+import { useUser } from "../../utils/hooks";
 
-import {useUser} from '../../utils/hooks';
-
-const Header = ({
-  toggleCartOpen,
-  cartOpen,
-  cartItemsCount,
-  // user,
-  logout,
-  clearCart,
-}) => {
+const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, clearCart }) => {
   const router = useRouter();
-  const user = useUser();
-  console.log(user)
+  const [user, { mutate }] = useUser();
   const path = router.asPath;
+
   return (
     <Navbar
       className={`border-bottom py-0 pr-0 ${styles.navbar}`}
@@ -67,8 +59,10 @@ const Header = ({
               <span
                 className="dropdown-item"
                 onClick={() => {
-                  logout();
-                  clearCart();
+                  axios.delete("/api/users/logout").then((_res) => {
+                    mutate(null);
+                    clearCart();
+                  });
                 }}
               >
                 Logout
@@ -104,11 +98,10 @@ const Header = ({
 
 const mapStateToProps = (state) => ({
   cartItemsCount: cartItemsCount(state),
-  // user: userSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch(logout()),
+  // logout: () => dispatch(logout()),
   clearCart: () => dispatch(clearCart()),
 });
 

@@ -8,7 +8,6 @@ const handler = nc();
 handler.use(middlewares);
 
 handler.get(async (req, res) => {
-  console.log("------==========>", req.session.userId);
   if (!req.session.userId) {
     sendError(res, {
       status: 404,
@@ -16,8 +15,6 @@ handler.get(async (req, res) => {
     });
     return;
   }
-
-  console.log("-------------->", req.session.userId);
 
   const user = await getUserById(req.session.userId);
 
