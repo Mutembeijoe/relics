@@ -20,13 +20,19 @@ import { useUser } from "../../utils/hooks";
 const SignIn = ({ previousRoute, deletePreviousRoute }) => {
   const router = useRouter();
   const [error, setError] = useState(null);
-  const [user, {mutate}] = useUser()
+  const [user, { mutate }] = useUser();
 
   useEffect(() => {
-    if(user){
-      router.back()
+    if (user) {
+      // redirect user accordingly
+      if (previousRoute === "/auth/signup") {
+        deletePreviousRoute();
+        router.push("/");
+      } else {
+        router.back();
+      }
     }
-  }, [user])
+  }, [user]);
 
   const loginSchema = yup.object({
     email: yup.string().email("Invalid email address").required(),
@@ -63,16 +69,8 @@ const SignIn = ({ previousRoute, deletePreviousRoute }) => {
                   });
                   actions.setSubmitting(false);
 
-                  mutate({username:'username'})
+                  mutate({ username: "me" });
 
-
-                  // //redirect user accordingly
-                  // if (previousRoute === "/auth/signup") {
-                  //   deletePreviousRoute();
-                  //   router.push("/");
-                  // } else {
-                  //   router.back();
-                  // }
                 } catch (error) {
                   const { message } = error.response.data;
                   setError(message);

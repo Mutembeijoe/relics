@@ -2,7 +2,7 @@ import Layout from "../../components/Layout/layout";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Alert from "react-bootstrap/Alert";
 import cn from "classnames";
 import axios from "axios";
@@ -13,19 +13,30 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { saveCurrentRoute } from "../../redux/route/actions";
 import Head from "next/head";
+import { useUser } from "../../utils/hooks";
 
 const SignUp = ({ saveCurrentRoute }) => {
   const router = useRouter();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [user, { mutate }] = useUser();
+
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        router.replace("/");
+      }, 500);
+    }
+  }, [user]);
 
   return (
     <Layout>
-    <Head>
-        <title>
-          Sign Up | Relics{" "}
-        </title>
-        <meta name="description" content="Create a Relics Account and start ordering your cool Branded fashion"/>
+      <Head>
+        <title>Sign Up | Relics </title>
+        <meta
+          name="description"
+          content="Create a Relics Account and start ordering your cool Branded fashion"
+        />
       </Head>
       <div className="container">
         <Alert
@@ -61,12 +72,10 @@ const SignUp = ({ saveCurrentRoute }) => {
                   });
                   actions.resetForm();
                   actions.setSubmitting(false);
-                  setError(null)
+                  setError(null);
                   setSuccess(true);
+                  mutate({ username: "me" });
                   saveCurrentRoute(router.asPath);
-                  setTimeout(() => {
-                    router.push("/auth/login");
-                  }, 1000);
                 } catch (error) {
                   const { label, message } = error.response.data;
 
@@ -166,7 +175,9 @@ const SignUp = ({ saveCurrentRoute }) => {
                         variant="primary"
                         type="submit"
                         className="rounded"
-                        disabled={Object.keys(errors).length !== 0}
+                        disabled={
+                          isSubmitting || Object.keys(errors).length !== 0
+                        }
                       >
                         Sign Up
                       </Button>
