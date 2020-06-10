@@ -6,8 +6,7 @@ import { Formik } from "formik";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const CheckoutForm = ({ setError, userEmail }) => {
-  console.log(userEmail)
+const CheckoutForm = ({ setError, userEmail, proceedToPayment }) => {
   const router = useRouter();
   const schema = yup.object({
     email: yup
@@ -36,12 +35,20 @@ const CheckoutForm = ({ setError, userEmail }) => {
       onSubmit={async (value, actions) => {
         try {
           await axios.post("/api/orders/create", {
-            ...value,
+            email: value.email,
+            phone: value.county,
+            first_name: value.first_name,
+            last_name: value.last_name,
+            address: value.address,
+            optional_address: value.optional_address,
+            town: value.town,
+            county: value.county
           });
 
           // actions.resetForm();
           actions.setSubmitting(false);
-          router.push("/checkout/payment");
+          proceedToPayment()
+        
         } catch (error) {
           const { message } = error.response.data;
           setError(message);

@@ -1,24 +1,26 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import nextConnect from "next-connect";
 import { createOrder } from "../../../database/Queries/orders/orders";
 import { sendError } from "../../../utils/api_utils";
+import middlewares from "../../../utils/middlewares/common";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  switch (req.method) {
-    case "POST":
-      try {
-        const id = await createOrder(req.body);
-        res.json({ id });
-        return;
-      } catch (error) {
-        sendError(res, {
-          status: 500,
-          // message: "500 -Internal Server Error",
-          message: error.message,
-        });
-        return;
-      }
-    default:
-      res.statusCode = 405;
-      res.end(`Method ${req.method} Not Allowed`);
+const handler = nextConnect();
+
+handler.use(middlewares).post(async (req, res) => {
+  const user_id = req.session.userId;
+  const order = {...req.body, user_id}
+
+  try {
+    const id = await createOrder(order);
+    res.json({ Success: "OK", id });
+    return;
+  } catch (error) {
+    sendError(res, {
+      status: 500,
+      // message: "500 -Internal Server Error",
+      message: error.message,
+    });
+    return;
   }
-};
+});
+
+export default handler;

@@ -23,6 +23,10 @@ const Checkout = ({ cartItems, cartTotal }) => {
     }
   }, [user]);
 
+  const proceedToPayment = () => {
+    router.replace("/checkout/payment");
+  };
+
   return (
     <Layout>
       <Head>
@@ -46,6 +50,7 @@ const Checkout = ({ cartItems, cartTotal }) => {
             <CheckoutForm
               setError={setError}
               userEmail={user ? user.email : ""}
+              proceedToPayment = {proceedToPayment}
             />
           </div>
           <div className="col-md-5 border-left my-4">
