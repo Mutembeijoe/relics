@@ -1,24 +1,8 @@
-import nc from 'next-connect'
-import session, { SessionOptions } from "express-session";
+import nextConnect from "next-connect";
+import session from "./session";
 
-const middlewares = nc()
+const middlewares = nextConnect();
 
-
-// expression sessions
-const sessionOptions: SessionOptions = {
-    secret: process.env.PRIVATE_KEY,
-    name: "sid",
-    cookie: {
-      maxAge: 1000 * 60 * 30,
-      secure: false,
-      sameSite: true,
-    },
-    rolling:true,
-    saveUninitialized:false,
-    resave:false
-  };
-  
-middlewares.use(session({ ...sessionOptions }));
-
+middlewares.use(session);
 
 export default middlewares;
