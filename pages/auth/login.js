@@ -2,10 +2,9 @@ import Layout from "../../components/Layout/layout";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import { login } from "../../redux/user/actions";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import cn from "classnames";
@@ -16,12 +15,18 @@ import * as yup from "yup";
 import { selectPreviousRoute } from "../../redux/route/selectors";
 import { deletePreviousRoute } from "../../redux/route/actions";
 import Head from "next/head";
+import { useUser } from "../../utils/hooks";
 
-const SignIn = ({ loginUser, previousRoute, deletePreviousRoute }) => {
+const SignIn = ({ previousRoute, deletePreviousRoute }) => {
   const router = useRouter();
-  console.log(previousRoute);
-
   const [error, setError] = useState(null);
+  const [user, {mutate}] = useUser()
+
+  useEffect(() => {
+    if(user){
+      router.back()
+    }
+  }, [user])
 
   const loginSchema = yup.object({
     email: yup.string().email("Invalid email address").required(),
@@ -31,10 +36,11 @@ const SignIn = ({ loginUser, previousRoute, deletePreviousRoute }) => {
   return (
     <Layout>
       <Head>
-        <title>
-          Sign In | Relics{" "}
-        </title>
-        <meta name="description" content="Sign In to your account and Order Online Now" />
+        <title>Sign In | Relics </title>
+        <meta
+          name="description"
+          content="Sign In to your account and Order Online Now"
+        />
       </Head>
       <div className="container">
         <Alert
@@ -52,27 +58,21 @@ const SignIn = ({ loginUser, previousRoute, deletePreviousRoute }) => {
               initialValues={{ email: "", password: "" }}
               onSubmit={async (value, actions) => {
                 try {
-                  const response = await axios.post("/api/users/login", {
+                  await axios.post("/api/users/login", {
                     ...value,
                   });
-                  const user = _.pick(response.data, [
-                    "username",
-                    "email",
-                    "token",
-                  ]);
-                  // save user to redux state
-                  loginUser(user);
-
                   actions.setSubmitting(false);
 
-                  //redirect user accordingly
+                  mutate({username:'username'})
 
-                  if (previousRoute === "/auth/signup") {
-                    deletePreviousRoute();
-                    router.push("/");
-                  } else {
-                    router.back();
-                  }
+
+                  // //redirect user accordingly
+                  // if (previousRoute === "/auth/signup") {
+                  //   deletePreviousRoute();
+                  //   router.push("/");
+                  // } else {
+                  //   router.back();
+                  // }
                 } catch (error) {
                   const { message } = error.response.data;
                   setError(message);
@@ -153,7 +153,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loginUser: (user) => dispatch(login(user)),
   deletePreviousRoute: () => dispatch(deletePreviousRoute()),
 });
 

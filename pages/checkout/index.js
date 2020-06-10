@@ -4,24 +4,24 @@ import CheckoutForm from "../../components/checkout_form/checkout-form.component
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { cartItemsSelector, cartTotalPrice } from "../../redux/cart/selectors";
-import { userSelector } from "../../redux/user/selectors";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import styles from "../../styles/shipping.module.scss";
 import Alert from "react-bootstrap/Alert";
 import cn from "classnames";
-import { useState } from "react";
+import { useUser } from "../../utils/hooks";
 
-const Checkout = ({ cartItems, cartTotal, user }) => {
+const Checkout = ({ cartItems, cartTotal }) => {
   const [error, setError] = useState(null);
   const router = useRouter();
+  const [user] = useUser();
 
   useEffect(() => {
-    if (!user.token) {
+    if (!user) {
       router.push("/auth/login");
     }
-  });
+  }, [user]);
 
   return (
     <Layout>
@@ -43,7 +43,10 @@ const Checkout = ({ cartItems, cartTotal, user }) => {
         </Alert>
         <div className="row">
           <div className="col-md-7">
-            <CheckoutForm setError={setError} />
+            <CheckoutForm
+              setError={setError}
+              userEmail={user ? user.email : ""}
+            />
           </div>
           <div className="col-md-5 border-left my-4">
             <div className="container">
@@ -115,7 +118,6 @@ const Checkout = ({ cartItems, cartTotal, user }) => {
 const mapStateToProps = createStructuredSelector({
   cartItems: cartItemsSelector,
   cartTotal: cartTotalPrice,
-  user: userSelector,
 });
 
 export default connect(mapStateToProps)(Checkout);

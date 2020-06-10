@@ -6,8 +6,9 @@ import { Formik } from "formik";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const CheckoutForm = ({ setError }) => {
-  const router = useRouter()
+const CheckoutForm = ({ setError, userEmail }) => {
+  console.log(userEmail)
+  const router = useRouter();
   const schema = yup.object({
     email: yup
       .string()
@@ -37,17 +38,17 @@ const CheckoutForm = ({ setError }) => {
           await axios.post("/api/orders/create", {
             ...value,
           });
-          
+
           // actions.resetForm();
           actions.setSubmitting(false);
-          router.push("/checkout/payment")
+          router.push("/checkout/payment");
         } catch (error) {
           const { message } = error.response.data;
           setError(message);
         }
       }}
       initialValues={{
-        email: "",
+        email: `${userEmail}`,
         phone: "",
         firstName: "",
         lastName: "",

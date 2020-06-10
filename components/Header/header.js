@@ -8,7 +8,6 @@ import axios from "axios";
 import styles from "./header.module.scss";
 import { connect } from "react-redux";
 import { cartItemsCount } from "../../redux/cart/selectors";
-// import { logout } from "../../redux/user/actions";
 import { clearCart } from "../../redux/cart/actions";
 import { useUser } from "../../utils/hooks";
 
