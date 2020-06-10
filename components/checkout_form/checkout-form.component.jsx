@@ -19,10 +19,10 @@ const CheckoutForm = ({ setError, userEmail }) => {
       .required("Phone is Required")
       .min(10, "Phone Number must be at least 10 digits")
       .max(20, "Phone Number cannot exceed 20 digits"),
-    firstName: yup.string().min(3).max(20).required(),
-    lastName: yup.string().min(3).max(20).required(),
+    first_name: yup.string().min(3).max(20).required(),
+    last_name: yup.string().min(3).max(20).required(),
     address: yup.string().min(3).max(20).required(),
-    address2: yup.string().min(3).max(20).notRequired(),
+    optional_address: yup.string().min(3).max(20).notRequired(),
     town: yup.string().min(3).max(20).required(),
     county: yup
       .string()
@@ -50,10 +50,10 @@ const CheckoutForm = ({ setError, userEmail }) => {
       initialValues={{
         email: `${userEmail}`,
         phone: "",
-        firstName: "",
-        lastName: "",
+        first_name: "",
+        last_name: "",
         address: "",
-        address2: "",
+        optional_address: "",
         town: "",
         county: "",
         terms: false,
@@ -114,34 +114,34 @@ const CheckoutForm = ({ setError, userEmail }) => {
               <Form.Group as={Col} controlId="formGridFirstName">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
-                  name="firstName"
+                  name="first_name"
                   type="text"
                   placeholder="First Name"
                   className="rounded"
-                  value={values.firstName}
+                  value={values.first_name}
                   onChange={handleChange}
-                  isInvalid={!!errors.firstName}
-                  isValid={touched.firstName && !errors.firstName}
+                  isInvalid={!!errors.first_name}
+                  isValid={touched.first_name && !errors.first_name}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {errors.firstName}
+                  {errors.first_name}
                 </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridLastName">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
-                  name="lastName"
+                  name="last_name"
                   type="text"
                   placeholder="Last Name"
                   className="rounded"
-                  value={values.lastName}
+                  value={values.last_name}
                   onChange={handleChange}
-                  isInvalid={!!errors.lastName}
-                  isValid={touched.lastName && !errors.lastName}
+                  isInvalid={!!errors.last_name}
+                  isValid={touched.last_name && !errors.last_name}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {errors.lastName}
+                  {errors.last_name}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
@@ -165,16 +165,16 @@ const CheckoutForm = ({ setError, userEmail }) => {
             <Form.Group controlId="formGridAddress2">
               <Form.Label>Address 2 (optional)</Form.Label>
               <Form.Control
-                name="address2"
+                name="optional_address"
                 placeholder="Apartment, studio, or floor"
                 className="rounded"
-                value={values.address2}
+                value={values.optional_address}
                 onChange={handleChange}
-                isInvalid={!!errors.address2}
-                isValid={touched.address2 && !errors.address2}
+                isInvalid={!!errors.optional_address}
+                isValid={touched.optional_address && !errors.optional_address}
               />
               <Form.Control.Feedback type="invalid">
-                {errors.address2}
+                {errors.optional_address}
               </Form.Control.Feedback>
             </Form.Group>
 
