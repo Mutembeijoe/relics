@@ -3,12 +3,16 @@ import Button from "react-bootstrap/Button";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { connect } from "react-redux";
-import { cartTotalPrice } from "../../redux/cart/selectors";
 import axios from "axios";
+
+import { cartTotalPrice } from "../../redux/cart/selectors";
 
 const PaymentForm = ({ cartTotal, setSuccess, headHome }) => {
   const schema = yup.object({
-    phone: yup.string().required().length(10, "Phone Number must be exactly 10 digits"),
+    phone: yup
+      .string()
+      .required()
+      .length(10, "Phone Number must be exactly 10 digits"),
   });
   return (
     <Formik
@@ -21,10 +25,10 @@ const PaymentForm = ({ cartTotal, setSuccess, headHome }) => {
           });
           actions.setSubmitting(false);
           actions.resetForm();
-          setSuccess(true)
-          headHome()
+          setSuccess(true);
+          headHome();
         } catch (err) {
-          console.log(err)
+          console.log(err);
         }
       }}
     >
@@ -59,8 +63,8 @@ const PaymentForm = ({ cartTotal, setSuccess, headHome }) => {
             </Form.Control.Feedback>
           </Form.Group>
           <div className="my-4 text-danger">
-            ** This is <b>not</b> a working payment, just fill in a number and
-            Place Order **
+            ** This is a <b>dummy</b> payment, just fill in a number and Place
+            Order **
           </div>
           <Button
             variant="primary"

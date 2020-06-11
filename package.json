@@ -6,9 +6,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "up":"docker-compose up -d",
-    "postup":"yarn dev",
-    "down":"docker-compose down",
+    "up": "docker-compose up -d",
+    "postup": "yarn dev",
+    "down": "docker-compose down",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
@@ -25,6 +25,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.1",
     "lodash": "^4.17.15",
+    "morgan": "^1.10.0",
     "next": "9.4.2",
     "next-connect": "^0.7.1",
     "next-redux-wrapper": "^6.0.0",
@@ -39,6 +40,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "reselect": "^4.0.0",
+    "rotating-file-stream": "^2.1.1",
     "sass": "^1.26.5",
     "slugify": "^1.4.0",
     "swr": "^0.2.2",

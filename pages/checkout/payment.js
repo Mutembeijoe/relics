@@ -10,10 +10,12 @@ import { useRouter } from "next/router";
 const Payment = () => {
   const [success, setSuccess] = useState(false);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const headHome = () => {
-    router.replace("/");
+    setTimeout(() => {
+      router.replace("/");
+    }, 500);
   };
 
   return (
@@ -23,7 +25,7 @@ const Payment = () => {
         <meta name="description" content="Easy Payment with mobile money" />
       </Head>
       <div className="container my-4">
-      <Alert
+        <Alert
           variant="success"
           className={`${cn(styles.alert, {
             [styles.active]: success,
