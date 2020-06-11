@@ -6,6 +6,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "up":"docker-compose up -d",
+    "postup":"yarn dev",
+    "down":"docker-compose down",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
