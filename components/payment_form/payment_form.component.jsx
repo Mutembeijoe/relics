@@ -8,7 +8,7 @@ import axios from "axios";
 
 const PaymentForm = ({ cartTotal, setSuccess, headHome }) => {
   const schema = yup.object({
-    phone: yup.string().required().trim().max(13).min(13),
+    phone: yup.string().required().length(10, "Phone Number must be exactly 10 digits"),
   });
   return (
     <Formik
@@ -49,7 +49,8 @@ const PaymentForm = ({ cartTotal, setSuccess, headHome }) => {
               name="phone"
               onChange={handleChange}
               value={values.phone}
-              placeholder="+254 710 _ _ _ _ _ _"
+              maxLength={10}
+              placeholder="0710 _ _ _ _ _ _"
               isInvalid={!!errors.phone}
               isValid={touched.phone && !errors.phone}
             />

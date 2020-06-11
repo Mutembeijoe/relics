@@ -1,15 +1,18 @@
-import Link from "next/link";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { useRouter } from "next/router";
-import cn from "classnames";
 import axios from "axios";
-import styles from "./header.module.scss";
+import cn from "classnames";
+import Link from "next/link";
 import { connect } from "react-redux";
+import { useRouter } from "next/router";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+
 import { cartItemsCount } from "../../redux/cart/selectors";
 import { clearCart } from "../../redux/cart/actions";
 import { useUser } from "../../utils/hooks";
+
+import styles from "./header.module.scss";
+
 
 const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, clearCart }) => {
   const router = useRouter();
@@ -100,7 +103,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // logout: () => dispatch(logout()),
   clearCart: () => dispatch(clearCart()),
 });
 

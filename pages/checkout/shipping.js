@@ -1,16 +1,18 @@
 import Table from "react-bootstrap/Table";
-import Layout from "../../components/Layout/layout";
-import CheckoutForm from "../../components/checkout_form/checkout-form.component";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { cartItemsSelector, cartTotalPrice } from "../../redux/cart/selectors";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import styles from "../../styles/shipping.module.scss";
 import Alert from "react-bootstrap/Alert";
 import cn from "classnames";
+
+import Layout from "../../components/Layout/layout";
+import CheckoutForm from "../../components/checkout_form/checkout-form.component";
 import { useUser } from "../../utils/hooks";
+import { cartItemsSelector, cartTotalPrice } from "../../redux/cart/selectors";
+
+import styles from "../../styles/shipping.module.scss";
 
 const Checkout = ({ cartItems, cartTotal }) => {
   const [error, setError] = useState(null);
@@ -50,7 +52,7 @@ const Checkout = ({ cartItems, cartTotal }) => {
             <CheckoutForm
               setError={setError}
               userEmail={user ? user.email : ""}
-              proceedToPayment = {proceedToPayment}
+              proceedToPayment={proceedToPayment}
             />
           </div>
           <div className="col-md-5 border-left my-4">
@@ -77,7 +79,7 @@ const Checkout = ({ cartItems, cartTotal }) => {
                               />
                             </div>
                             <div className="px-3 d-flex flex-column">
-                              <span>{item.product_name}</span>
+                              ayment <span>{item.product_name}</span>
                               <div className="d-flex flex-row text-muted">
                                 <span className="text-uppercase">
                                   {item.size}

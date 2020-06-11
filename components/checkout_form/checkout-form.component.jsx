@@ -4,10 +4,10 @@ import Col from "react-bootstrap/Col";
 import * as yup from "yup";
 import { Formik } from "formik";
 import axios from "axios";
-import { useRouter } from "next/router";
+import { connect } from "react-redux";
+import { clearCart } from "../../redux/cart/actions";
 
-const CheckoutForm = ({ setError, userEmail, proceedToPayment }) => {
-  const router = useRouter();
+const CheckoutForm = ({ setError, userEmail, proceedToPayment, clearCart }) => {
   const schema = yup.object({
     email: yup
       .string()
@@ -16,8 +16,7 @@ const CheckoutForm = ({ setError, userEmail, proceedToPayment }) => {
     phone: yup
       .string()
       .required("Phone is Required")
-      .min(10, "Phone Number must be at least 10 digits")
-      .max(20, "Phone Number cannot exceed 20 digits"),
+      .length(10, "Phone Number must be exactly 10 digits"),
     first_name: yup.string().min(3).max(20).required(),
     last_name: yup.string().min(3).max(20).required(),
     address: yup.string().min(3).max(20).required(),
@@ -42,13 +41,13 @@ const CheckoutForm = ({ setError, userEmail, proceedToPayment }) => {
             address: value.address,
             optional_address: value.optional_address,
             town: value.town,
-            county: value.county
+            county: value.county,
           });
 
           actions.resetForm();
           actions.setSubmitting(false);
-          proceedToPayment()
-        
+          clearCart()
+          proceedToPayment();
         } catch (error) {
           const { message } = error.response.data;
           setError(message);
@@ -100,9 +99,10 @@ const CheckoutForm = ({ setError, userEmail, proceedToPayment }) => {
                 <Form.Label>Phone</Form.Label>
                 <Form.Control
                   name="phone"
-                  placeholder="+254 712..."
+                  placeholder="0710 _ _ _ _ _ _"
                   className="rounded"
                   value={values.phone}
+                  maxLength={10}
                   onChange={handleChange}
                   isInvalid={!!errors.phone}
                   isValid={touched.phone && !errors.phone}
@@ -255,4 +255,8 @@ const CheckoutForm = ({ setError, userEmail, proceedToPayment }) => {
   );
 };
 
-export default CheckoutForm;
+const mapDispatchToProps = (dispatch) => ({
+  clearCart: () => dispatch(clearCart()),
+});
+
+export default connect(null, mapDispatchToProps)(CheckoutForm);
