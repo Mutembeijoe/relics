@@ -45,7 +45,7 @@ const CheckoutForm = ({ setError, userEmail, proceedToPayment }) => {
             county: value.county
           });
 
-          // actions.resetForm();
+          actions.resetForm();
           actions.setSubmitting(false);
           proceedToPayment()
         

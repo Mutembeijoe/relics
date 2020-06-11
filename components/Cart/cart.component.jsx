@@ -131,7 +131,7 @@ const Cart = (props) => {
               </div>
             </div>
             <div className="my-3">
-              <Link href="/checkout" passHref>
+              <Link href="/checkout/shipping" passHref>
                 <Button className="rounded" variant="primary" size="lg" block>
                   CheckOut
                   <i className="mdi mdi-arrow-right-bold mx-1" />

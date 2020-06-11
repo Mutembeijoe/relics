@@ -1,10 +1,19 @@
-.paymentOptions{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
+.paymentOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    .mpesa{
-        width:100px;
-        height:auto;
-    }
+  .mpesa {
+    width: 100px;
+    height: auto;
+  }
+}
+
+.alert {
+  display: none;
+  max-width: 28rem;
+
+  &.active {
+    display: block;
+  }
 }

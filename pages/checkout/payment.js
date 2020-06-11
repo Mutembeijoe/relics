@@ -2,8 +2,20 @@ import Layout from "../../components/Layout/layout";
 import Head from "next/head";
 import styles from "../../styles/payment_page.module.scss";
 import PaymentForm from "../../components/payment_form/payment_form.component";
+import { useState } from "react";
+import cn from "classnames";
+import Alert from "react-bootstrap/Alert";
+import { useRouter } from "next/router";
 
 const Payment = () => {
+  const [success, setSuccess] = useState(false);
+
+  const router = useRouter()
+
+  const headHome = () => {
+    router.replace("/");
+  };
+
   return (
     <Layout>
       <Head>
@@ -11,6 +23,14 @@ const Payment = () => {
         <meta name="description" content="Easy Payment with mobile money" />
       </Head>
       <div className="container my-4">
+      <Alert
+          variant="success"
+          className={`${cn(styles.alert, {
+            [styles.active]: success,
+          })} mx-auto text-center`}
+        >
+          Payment Verified
+        </Alert>
         <div className="row">
           <div className="col-md-5">
             <h2>Payment Method</h2>
@@ -32,7 +52,7 @@ const Payment = () => {
                 <img src="/mpesa.png" alt="mpesa" className="img-fluid" />
               </div>
             </div>
-            <PaymentForm/>
+            <PaymentForm setSuccess={setSuccess} headHome={headHome} />
           </div>
         </div>
       </div>

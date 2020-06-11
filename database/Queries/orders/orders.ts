@@ -8,3 +8,12 @@ export async function createOrder(order: Order) {
     })
     .returning("id");
 }
+
+export async function verifyPayment(orderId: number) {
+  return await knex("orders")
+    .update({
+      payment_status: "verified",
+    })
+    .where("id", orderId)
+    .returning("id");
+}

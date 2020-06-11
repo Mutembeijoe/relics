@@ -4,8 +4,9 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { connect } from "react-redux";
 import { cartTotalPrice } from "../../redux/cart/selectors";
+import axios from "axios";
 
-const PaymentForm = ({ cartTotal }) => {
+const PaymentForm = ({ cartTotal, setSuccess, headHome }) => {
   const schema = yup.object({
     phone: yup.string().required().trim().max(13).min(13),
   });
@@ -13,7 +14,19 @@ const PaymentForm = ({ cartTotal }) => {
     <Formik
       initialValues={{ phone: "" }}
       validationSchema={schema}
-      onSubmit={console.log}
+      onSubmit={async (value, actions) => {
+        try {
+          await axios.put("/api/orders/create", {
+            payment_amount: value,
+          });
+          actions.setSubmitting(false);
+          actions.resetForm();
+          setSuccess(true)
+          headHome()
+        } catch (err) {
+          console.log(err)
+        }
+      }}
     >
       {({
         handleChange,
@@ -45,7 +58,8 @@ const PaymentForm = ({ cartTotal }) => {
             </Form.Control.Feedback>
           </Form.Group>
           <div className="my-4 text-danger">
-            ** This is <b>not</b> a working payment, just fill in a number and Place Order **
+            ** This is <b>not</b> a working payment, just fill in a number and
+            Place Order **
           </div>
           <Button
             variant="primary"
