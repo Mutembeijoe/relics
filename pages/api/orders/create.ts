@@ -10,7 +10,7 @@ const handler = nextConnect();
 
 handler
   .use(middlewares)
-  .post(async (req, res) => {
+  .post(async (req:any, res) => {
     const user_id = req.session.userId;
     const order = { ...req.body, user_id };
 
@@ -28,7 +28,7 @@ handler
       return;
     }
   })
-  .put(async (req, res) => {
+  .put(async (req:any, res) => {
     const order_id = req.session.orderId;
 
     try {

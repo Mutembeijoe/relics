@@ -7,7 +7,7 @@ const handler = nc();
 
 handler.use(middlewares);
 
-handler.get(async (req, res) => {
+handler.get(async (req:any, res) => {
   if (!req.session.userId) {
     sendError(res, {
       status: 404,

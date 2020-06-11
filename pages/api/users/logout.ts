@@ -5,7 +5,7 @@ const handler = nextConnect();
 
 handler.use(middlewares)
 
-handler.delete((req, res) => {
+handler.delete((req:any, res) => {
     console.log(req.session)
     req.session.destroy((err) => {
         if (err) {throw new Error("Errororororo")}
