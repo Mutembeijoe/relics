@@ -1,6 +1,6 @@
-import Layout from "../../components/Layout/layout";
+import Layout from "../../../components/Layout/layout";
 import { MDBDataTable } from "mdbreact";
-import { useOrders } from "../../utils/hooks";
+import { useOrders } from "../../../utils/hooks";
 // import Link from "next/link";
 import Button from "react-bootstrap/Button";
 
