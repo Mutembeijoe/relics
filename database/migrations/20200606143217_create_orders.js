@@ -14,6 +14,7 @@ exports.up = function (knex) {
     table.string("payment_status").notNullable().default("pending");
     table.integer("user_id").notNullable();
     table.foreign("user_id").references("id").inTable("users");
+    table.decimal("total").notNullable()
   });
 };
 

@@ -1,9 +1,13 @@
+import Head from "next/head";
+
 import Layout from "../../components/Layout/layout";
 import ProductCardDisplay from "../../components/product-card-display/product-card-display.component";
-import utilsStyles from "../../styles/utils.module.css";
+
 import { getAllCategorySlugs } from "../../database/Queries/category";
 import { getAllProductsInCategory } from "../../database/Queries/product";
-import Head from "next/head";
+
+import utilsStyles from "../../styles/utils.module.css";
+
 
 export default function Category({ products, slug }) {
   console.log(slug);
