@@ -12,4 +12,13 @@ export type Order = {
   county: string;
   payment_status?: string;
   user_id: number;
+  total: number;
+};
+
+export type OrderItem = {
+  order_id?: number;
+  product_id: number;
+  unit_price: number;
+  size: string;
+  quantity:number;
 };

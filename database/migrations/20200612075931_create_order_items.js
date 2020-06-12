@@ -7,7 +7,8 @@ exports.up = function (knex) {
     table.foreign("order_id").references("id").inTable("orders");
     table.integer("product_id").notNullable();
     table.foreign("product_id").references("id").inTable("products");
-    table.decimal("amount").notNullable();
+    table.decimal("unit_price").notNullable();
+    table.integer("quantity").notNullable();
     table.string("size").notNullable();
   });
 };

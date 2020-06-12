@@ -6,8 +6,16 @@ import { Formik } from "formik";
 import axios from "axios";
 import { connect } from "react-redux";
 import { clearCart } from "../../redux/cart/actions";
+import { cartItemsSelector, cartTotalPrice } from "../../redux/cart/selectors";
 
-const CheckoutForm = ({ setError, userEmail, proceedToPayment, clearCart }) => {
+const CheckoutForm = ({
+  setError,
+  userEmail,
+  proceedToPayment,
+  clearCart,
+  cartItems,
+  cartTotal,
+}) => {
   const schema = yup.object({
     email: yup
       .string()
@@ -34,19 +42,23 @@ const CheckoutForm = ({ setError, userEmail, proceedToPayment, clearCart }) => {
       onSubmit={async (value, actions) => {
         try {
           await axios.post("/api/orders/create", {
-            email: value.email,
-            phone: value.county,
-            first_name: value.first_name,
-            last_name: value.last_name,
-            address: value.address,
-            optional_address: value.optional_address,
-            town: value.town,
-            county: value.county,
+            shipping: {
+              email: value.email,
+              phone: value.county,
+              first_name: value.first_name,
+              last_name: value.last_name,
+              address: value.address,
+              optional_address: value.optional_address,
+              town: value.town,
+              county: value.county,
+              total:cartTotal
+            },
+            cartItems,
           });
 
           actions.resetForm();
           actions.setSubmitting(false);
-          clearCart()
+          clearCart();
           proceedToPayment();
         } catch (error) {
           const { message } = error.response.data;
@@ -255,8 +267,12 @@ const CheckoutForm = ({ setError, userEmail, proceedToPayment, clearCart }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  cartItems: cartItemsSelector(state),
+  cartTotal: cartTotalPrice(state)
+});
 const mapDispatchToProps = (dispatch) => ({
   clearCart: () => dispatch(clearCart()),
 });
 
-export default connect(null, mapDispatchToProps)(CheckoutForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutForm);
