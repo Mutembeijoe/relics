@@ -51,7 +51,7 @@ const CheckoutForm = ({
               optional_address: value.optional_address,
               town: value.town,
               county: value.county,
-              total:cartTotal
+              total:(cartTotal+200)
             },
             cartItems,
           });

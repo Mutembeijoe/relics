@@ -7,7 +7,22 @@ const handler = nextConnect();
 handler.use(middlewares).get(async (req, res) => {
   const orderId = req.query.id;
 
-  const order = await getOrderById(+orderId);
+  const response = await getOrderById(+orderId);
+
+  const orderItems = response.map((item) => {
+    return {
+      quantity: item.quantity,
+      unit_price: item.unit_price,
+      img_url: item.img_url,
+      product_name: item.product_name,
+    };
+  });
+
+  const order = {
+    created_at: response[0].created_at,
+    total: response[0].total,
+    orderItems: orderItems,
+  };
 
   res.status(200).json(order);
 });

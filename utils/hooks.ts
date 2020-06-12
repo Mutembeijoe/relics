@@ -18,8 +18,8 @@ export const useOrders = () => {
   return [orders];
 };
 
-export const useOrder = () => {
-  const { data } = useSwr("/api/orders/:id", fetcher);
+export const useOrder = (id) => {
+  const { data } = useSwr(`/api/orders/${id}`, fetcher);
 
   const order = data && data.order;
 

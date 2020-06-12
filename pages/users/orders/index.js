@@ -1,7 +1,7 @@
 import Layout from "../../../components/Layout/layout";
 import { MDBDataTable } from "mdbreact";
 import { useOrders } from "../../../utils/hooks";
-// import Link from "next/link";
+import Link from "next/link";
 import Button from "react-bootstrap/Button";
 
 export default function Orders() {
@@ -75,14 +75,11 @@ export default function Orders() {
         ...data.rows.map((row, order) => ({
           ...row,
           view: (
-            <Button
-              variant="primary"
-              className="rounded btn-sm"
-              key={order}
-              //   searchvalue={order}
-            >
-              View
-            </Button>
+            <Link href="/users/orders/[id]" as={`/users/orders/${49}`} passHref>
+              <Button variant="primary" className="rounded btn-sm" key={order}>
+                View
+              </Button>
+            </Link>
           ),
         })),
       ],
