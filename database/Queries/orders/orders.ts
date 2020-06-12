@@ -36,6 +36,22 @@ export async function verifyPayment(orderId: number) {
 
 export async function getAllUserOrders(userId: number) {
   return await knex("orders")
-    .select("first_name", "address", "created_at", "phone", "total")
+    .select("id", "first_name", "address", "created_at", "phone", "total")
     .where("user_id", userId);
+}
+
+export async function getOrderById(orderId: number) {
+  return await knex("order_items")
+    .join("products", "products.id", "=", "order_items.product_id")
+    .join("orders", "orders.id", "=", "order_items.order_id")
+    .select(
+      "orders.created_at",
+      "products.product_name",
+      "products.img_url",
+      "order_items.quantity",
+      "order_items.unit_price",
+      "order_items.quantity",
+      "orders.total"
+    )
+    .where("order_items.order_id", orderId);
 }
