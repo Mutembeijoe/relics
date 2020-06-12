@@ -10,11 +10,18 @@ export const useUser = () => {
   return [user, { mutate }];
 };
 
-
 export const useOrders = () => {
-  const {data, mutate} = useSwr("/api/users/orders", fetcher);
+  const { data } = useSwr("/api/users/orders", fetcher);
 
   const orders = data && data.orders;
 
-  return [orders, {mutate}];
-}
+  return [orders];
+};
+
+export const useOrder = () => {
+  const { data } = useSwr("/api/orders/:id", fetcher);
+
+  const order = data && data.order;
+
+  return [order];
+};
