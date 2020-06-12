@@ -25,6 +25,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.1",
     "lodash": "^4.17.15",
+    "mdbreact": "^4.27.0",
     "morgan": "^1.10.0",
     "next": "9.4.2",
     "next-connect": "^0.7.1",

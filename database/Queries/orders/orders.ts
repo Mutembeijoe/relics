@@ -33,3 +33,9 @@ export async function verifyPayment(orderId: number) {
     .where("id", orderId)
     .returning("id");
 }
+
+export async function getAllUserOrders(userId: number) {
+  return await knex("orders")
+    .select("first_name", "address", "created_at", "phone", "total")
+    .where("user_id", userId);
+}
