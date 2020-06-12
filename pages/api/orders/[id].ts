@@ -11,6 +11,8 @@ handler.use(middlewares).get(async (req, res) => {
 
   const orderItems = response.map((item) => {
     return {
+      id:item.id,
+      size:item.size,
       quantity: item.quantity,
       unit_price: item.unit_price,
       img_url: item.img_url,
@@ -24,7 +26,7 @@ handler.use(middlewares).get(async (req, res) => {
     orderItems: orderItems,
   };
 
-  res.status(200).json(order);
+  res.status(200).json({order});
 });
 
 export default handler;

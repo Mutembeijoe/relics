@@ -48,9 +48,11 @@ export async function getOrderById(orderId: number) {
       "orders.created_at",
       "products.product_name",
       "products.img_url",
+      "products.id",
       "order_items.quantity",
       "order_items.unit_price",
       "order_items.quantity",
+      "order_items.size",
       "orders.total"
     )
     .where("order_items.order_id", orderId);

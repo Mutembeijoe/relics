@@ -1,8 +1,8 @@
+import Table from "react-bootstrap/Table";
 import Layout from "../../../components/Layout/layout";
 import { useOrder } from "../../../utils/hooks";
 
-export default function Order({orderId}) {
-  console.log("==========>",orderId)
+export default function Order({ orderId }) {
   const [order] = useOrder(+orderId);
 
   return (
@@ -12,13 +12,13 @@ export default function Order({orderId}) {
           <div>Loading ....</div>
         ) : (
           <div>
-          {console.log(order)}
+            {console.log(order)}
             <div>
-              <span>Date Ordered</span>
-              <span>04/09/2020</span>
+              <span className="mr-2 font-weight-bold">Date Ordered</span>
+              <span>{order.created_at}</span>
             </div>
             <div>
-              <span>Items Ordered</span>
+              <span className="font-weight-bold">Items Ordered</span>
             </div>
             <div>
               <Table hover>
@@ -30,7 +30,7 @@ export default function Order({orderId}) {
                   </tr>
                 </thead>
                 <tbody className="border-bottom">
-                  {orderItems.map((item) => {
+                  {order.orderItems.map((item) => {
                     return (
                       <tr key={`${item.id}_${item.size}`}>
                         <td className="py-3">
@@ -48,13 +48,13 @@ export default function Order({orderId}) {
                                 <span className="text-uppercase">
                                   {item.size}
                                 </span>
-                                <span className="px-2">Ksh {item.price}</span>
+                                <span className="px-2">Ksh {item.unit_price}</span>
                               </div>
                             </div>
                           </div>
                         </td>
                         <td>{item.quantity}</td>
-                        <td>{item.quantity * item.price}</td>
+                        <td>{item.unit_price * item.quantity}</td>
                       </tr>
                     );
                   })}
@@ -62,7 +62,7 @@ export default function Order({orderId}) {
                     <td colSpan={2} className="text-right font-weight-bold">
                       Subtotal
                     </td>
-                    <td>{cartTotal}</td>
+                    <td>{order.total}</td>
                   </tr>
                   <tr>
                     <td colSpan={2} className="text-right font-weight-bold">
@@ -74,7 +74,7 @@ export default function Order({orderId}) {
                     <td colSpan={2} className="text-right font-weight-bold">
                       Total
                     </td>
-                    <td>KSh {cartTotal + 200}</td>
+                    <td>KSh {+order.total + 200}</td>
                   </tr>
                 </tbody>
               </Table>
