@@ -8,6 +8,7 @@ export type Order = {
   email: string;
   address: string;
   optional_address?: string;
+  phone:string;
   town: string;
   county: string;
   payment_status?: string;

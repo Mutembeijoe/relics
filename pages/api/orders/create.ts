@@ -27,7 +27,7 @@ handler
       const id = await createOrder(order, orderItems);
 
       req.session.orderId = id;
-      res.json({ Success: "OK", session: req.session });
+      res.json({ Success: "OK", orderId: req.session.orderId});
       return;
     } catch (error) {
       sendError(res, {

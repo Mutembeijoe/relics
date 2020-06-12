@@ -13,7 +13,6 @@ import { useUser } from "../../utils/hooks";
 
 import styles from "./header.module.scss";
 
-
 const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, clearCart }) => {
   const router = useRouter();
   const [user, { mutate }] = useUser();
@@ -55,8 +54,9 @@ const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, clearCart }) => {
             </Link>
           ) : (
             <NavDropdown title={user.username} id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">my orders</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Saved Cart</NavDropdown.Item>
+              <Link href="/users/orders" passHref>
+                <NavDropdown.Item>my orders</NavDropdown.Item>
+              </Link>
               <NavDropdown.Divider />
               <span
                 className="dropdown-item"

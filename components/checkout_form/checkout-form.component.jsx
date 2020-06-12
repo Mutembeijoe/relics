@@ -44,7 +44,7 @@ const CheckoutForm = ({
           await axios.post("/api/orders/create", {
             shipping: {
               email: value.email,
-              phone: value.county,
+              phone: value.phone,
               first_name: value.first_name,
               last_name: value.last_name,
               address: value.address,
