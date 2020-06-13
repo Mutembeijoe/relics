@@ -1,17 +1,14 @@
 import session, { SessionOptions } from "express-session";
-import redis, { RedisClient } from "redis";
-import { RedisStoreOptions, RedisStore } from "connect-redis";
+import sessionKnex from "connect-session-knex";
+import knex from "../../database/knex";
 
-const Store: RedisStore = require("connect-redis")(session);
-const redisClient: RedisClient = redis.createClient();
-
-const redisStoreOptions: RedisStoreOptions = {
-  client: redisClient,
-};
+const KnexSessionStore = sessionKnex(session);
 
 // expression sessions
 const sessionOptions: SessionOptions = {
-  store: new Store(redisStoreOptions),
+  store: new KnexSessionStore({
+    knex,
+  }),
   secret: process.env.PRIVATE_KEY,
   name: "sid",
   cookie: {

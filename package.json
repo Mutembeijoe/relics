@@ -19,6 +19,7 @@
     "bcryptjs": "^2.4.3",
     "classnames": "^2.2.6",
     "connect-redis": "^4.0.4",
+    "connect-session-knex": "^1.7.1",
     "date-fns": "^2.14.0",
     "dotenv": "^8.2.0",
     "express-session": "^1.17.1",
