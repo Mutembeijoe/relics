@@ -5,16 +5,18 @@ Relics is a portfolio e-commerce website that showcases branded clothe items (Ts
 ## Tech Stack
 
 - ### [Nextjs](https://nextjs.org/)
-  The site is build with next js. Next js is a react framework for building seo friendly Single Page Applications (SPAs).
+  The site is built with next js. Next js is a react framework for building seo friendly Single Page Applications (SPAs).
   This is achieved through its pre-rendering capabilitites.
   Relics is a hybrid application, with ServerSide Rendering(SSR), Static Site Generation(SSG) and Client Side Fetching.
-- ### React js
 
-  Next js under the hood is really just react
+- ### React/Redux
+
+  Next js under the hood is really just react. Relics Embraces React modern features using Functional components with hooks. 
+  Relics also utilises the React-redux ecosystem for state management.
 
 - ### PostgreSQL
 
-  Relics is built with the popular SQL database postgresql, utilizing
+  Relics is built with a SQL database - postgreSQL, utilizing
   postgres specific data types such as JSONB
 
 - ### Redis
@@ -22,17 +24,17 @@ Relics is a portfolio e-commerce website that showcases branded clothe items (Ts
   Relics uses redis in-memory key:value store for session management.
   See the `redis-session branch`
 
-  The deployed version on heroku utilizes postgres due to heroku redis addon policy
+  The deployed version on heroku utilizes postgres due to heroku's constrain on using the redis addon
 
 - ### Bootstrap 4+
 
-  The site Stlying is based on Twitter Boostrap's Styling Version 4
+  The site Stlying is based on Twitter Boostrap 4+
 
 - ### SASS/CSS/[CSS Modules](https://github.com/css-modules/css-modules)
 
   Custom styles are written in Sass with the css module scoping that makes css styles modular and reusable.
 
-- ### Docker
+- ### Docker (Optional)
   Relics utilizes docker with a docker-compose yaml file to ease development and reduce time spent spinning containers. Just run
   ```bash
     yarn up
