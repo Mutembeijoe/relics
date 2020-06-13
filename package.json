@@ -40,7 +40,6 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "reselect": "^4.0.0",
-    "rotating-file-stream": "^2.1.1",
     "sass": "^1.26.5",
     "slugify": "^1.4.0",
     "swr": "^0.2.2",
