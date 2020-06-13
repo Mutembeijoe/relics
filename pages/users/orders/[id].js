@@ -1,6 +1,7 @@
 import Table from "react-bootstrap/Table";
 import Layout from "../../../components/Layout/layout";
 import { useOrder } from "../../../utils/hooks";
+import { format } from "date-fns";
 
 export default function Order({ orderId }) {
   const [order] = useOrder(+orderId);
@@ -15,9 +16,11 @@ export default function Order({ orderId }) {
             {console.log(order)}
             <div>
               <span className="mr-2 font-weight-bold">Date Ordered</span>
-              <span>{order.created_at}</span>
+              <span>
+                {format(new Date(order.created_at), "yyyy/MM/dd - HH:mm")}
+              </span>
             </div>
-            <div>
+            <div className="mt-4">
               <span className="font-weight-bold">Items Ordered</span>
             </div>
             <div>
@@ -43,12 +46,14 @@ export default function Order({ orderId }) {
                               />
                             </div>
                             <div className="px-3 d-flex flex-column">
-                              ayment <span>{item.product_name}</span>
+                              <span>{item.product_name}</span>
                               <div className="d-flex flex-row text-muted">
                                 <span className="text-uppercase">
                                   {item.size}
                                 </span>
-                                <span className="px-2">Ksh {item.unit_price}</span>
+                                <span className="px-2">
+                                  Ksh {item.unit_price}
+                                </span>
                               </div>
                             </div>
                           </div>

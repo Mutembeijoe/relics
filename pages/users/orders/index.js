@@ -3,6 +3,7 @@ import { MDBDataTable } from "mdbreact";
 import { useOrders } from "../../../utils/hooks";
 import Link from "next/link";
 import Button from "react-bootstrap/Button";
+import { format } from "date-fns";
 
 export default function Orders() {
   const [orders] = useOrders();
@@ -10,7 +11,8 @@ export default function Orders() {
   const generateData = () => {
     const rows = orders.map((order) => {
       return {
-        date: order.created_at,
+        id:order.id,
+        date: format(new Date(order.created_at), "yyyy/MM/dd"),
         name: order.first_name,
         address: order.address,
         phone: order.phone,
@@ -61,8 +63,6 @@ export default function Orders() {
       rows: rows,
     };
 
-    // return data;
-
     const allData = {
       columns: [
         ...data.columns,
@@ -75,7 +75,7 @@ export default function Orders() {
         ...data.rows.map((row, order) => ({
           ...row,
           view: (
-            <Link href="/users/orders/[id]" as={`/users/orders/${49}`} passHref>
+            <Link href="/users/orders/[id]" as={`/users/orders/${row.id}`} passHref>
               <Button variant="primary" className="rounded btn-sm" key={order}>
                 View
               </Button>
