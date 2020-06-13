@@ -36,7 +36,7 @@ const initStore = ({ isServer }) => {
     const persistConfig = {
       key: "root",
       storage,
-      whitelist: ["cart", "user", "route"],
+      whitelist: ["cart","route"],
     };
 
     const persistedReducer = persistReducer(persistConfig, reducer);

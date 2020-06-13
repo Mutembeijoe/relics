@@ -10,7 +10,6 @@ import utilsStyles from "../../styles/utils.module.css";
 
 
 export default function Category({ products, slug }) {
-  console.log(slug);
   return (
     <Layout>
       <Head>
