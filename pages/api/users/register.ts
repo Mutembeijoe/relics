@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import _ from "lodash";
 import nc from "next-connect";
 

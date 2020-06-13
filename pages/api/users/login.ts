@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from 'bcryptjs';
 import _ from "lodash";
 import { getUserByEmail } from "../../../database/Queries/users/users";
 import { sendError, logIn } from "../../../utils/api_utils";
