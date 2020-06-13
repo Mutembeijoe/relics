@@ -27,7 +27,7 @@ const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, clearCart }) => {
       <Link href="/" passHref>
         <Navbar.Brand className="font-weight-bold">Relics</Navbar.Brand>
       </Link>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Toggle aria-controls="basic-navbar-nav" className={styles.toggler}/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Link href="/" passHref>
