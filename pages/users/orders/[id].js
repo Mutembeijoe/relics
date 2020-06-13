@@ -1,17 +1,30 @@
 import Table from "react-bootstrap/Table";
 import Spinner from "react-bootstrap/Spinner";
 import Layout from "../../../components/Layout/layout";
-import { useOrder } from "../../../utils/hooks";
+import { useOrder, useUser } from "../../../utils/hooks";
 import { format } from "date-fns";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Order({ orderId }) {
   const [order] = useOrder(+orderId);
+  const [user] = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/auth/login");
+    }
+  }, [user]);
 
   return (
     <Layout>
       <div className="container my-4">
         {!order ? (
-          <div className="d-flex align-items-center justify-content-center" style={{height:"300px"}}>
+          <div
+            className="d-flex align-items-center justify-content-center"
+            style={{ height: "300px" }}
+          >
             <Spinner animation="grow" role="status">
               <span className="sr-only">Loading...</span>
             </Spinner>

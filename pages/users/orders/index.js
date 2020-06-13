@@ -1,13 +1,23 @@
 import Layout from "../../../components/Layout/layout";
 import { MDBDataTable } from "mdbreact";
-import { useOrders } from "../../../utils/hooks";
+import { useOrders, useUser } from "../../../utils/hooks";
 import Link from "next/link";
 import Button from "react-bootstrap/Button";
 import { format } from "date-fns";
 import Spinner from "react-bootstrap/Spinner";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Orders() {
   const [orders] = useOrders();
+  const [user] = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/auth/login");
+    }
+  }, [user]);
 
   const generateData = () => {
     const rows = orders.map((order) => {
