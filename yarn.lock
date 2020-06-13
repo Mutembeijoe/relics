@@ -1659,7 +1659,7 @@ bindings@^1.5.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
-bluebird@^3.5.5:
+bluebird@^3.5.5, bluebird@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
@@ -2207,6 +2207,14 @@ connect-redis@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/connect-redis/-/connect-redis-4.0.4.tgz#b194abe2f3754551f38086e1a28cb9e68d6c3b28"
   integrity sha512-aXk7btMlG0J5LqtPNRpFKa5fglzlTzukYNx+Fq8cghbUIQHN/gyK9c3+b0XEROMwiSxMoZDADqjp9tdpUoZLAg==
+
+connect-session-knex@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/connect-session-knex/-/connect-session-knex-1.7.1.tgz#7c4a530aadd2ae37ff3716a21be5d56c504ca039"
+  integrity sha512-mPlJNuAruH/LaaH2F8Uw3v+ckXMcOqor7XoHi7kvCihXOJOhGeTMC7qGdrQE/dufXM+vGTTloFALfbmNDZuvxA==
+  dependencies:
+    bluebird "^3.7.2"
+    knex "^0.21.1"
 
 console-browserify@^1.1.0:
   version "1.2.0"
