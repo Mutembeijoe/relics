@@ -1,4 +1,5 @@
 import Table from "react-bootstrap/Table";
+import Spinner from "react-bootstrap/Spinner";
 import Layout from "../../../components/Layout/layout";
 import { useOrder } from "../../../utils/hooks";
 import { format } from "date-fns";
@@ -10,7 +11,11 @@ export default function Order({ orderId }) {
     <Layout>
       <div className="container my-4">
         {!order ? (
-          <div>Loading ....</div>
+          <div className="d-flex align-items-center justify-content-center" style={{height:"300px"}}>
+            <Spinner animation="grow" role="status">
+              <span className="sr-only">Loading...</span>
+            </Spinner>
+          </div>
         ) : (
           <div>
             {console.log(order)}

@@ -4,6 +4,7 @@ import { useOrders } from "../../../utils/hooks";
 import Link from "next/link";
 import Button from "react-bootstrap/Button";
 import { format } from "date-fns";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function Orders() {
   const [orders] = useOrders();
@@ -11,7 +12,7 @@ export default function Orders() {
   const generateData = () => {
     const rows = orders.map((order) => {
       return {
-        id:order.id,
+        id: order.id,
         date: format(new Date(order.created_at), "yyyy/MM/dd"),
         name: order.first_name,
         address: order.address,
@@ -75,7 +76,11 @@ export default function Orders() {
         ...data.rows.map((row, order) => ({
           ...row,
           view: (
-            <Link href="/users/orders/[id]" as={`/users/orders/${row.id}`} passHref>
+            <Link
+              href="/users/orders/[id]"
+              as={`/users/orders/${row.id}`}
+              passHref
+            >
               <Button variant="primary" className="rounded btn-sm" key={order}>
                 View
               </Button>
@@ -94,7 +99,14 @@ export default function Orders() {
         {orders ? (
           <MDBDataTable bordered hover data={generateData()} />
         ) : (
-          <div>Loading....</div>
+          <div
+            className="d-flex align-items-center justify-content-center"
+            style={{ height: "300px" }}
+          >
+            <Spinner animation="grow" role="status">
+              <span className="sr-only">Loading...</span>
+            </Spinner>
+          </div>
         )}
       </div>
     </Layout>
