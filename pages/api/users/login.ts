@@ -15,7 +15,7 @@ handler.post(async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    let user = await getUserByEmai(email);
+    let user = await getUserByEmail(email);
 
     if (!user)
       return sendError(res, {
