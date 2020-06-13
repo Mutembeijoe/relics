@@ -12,8 +12,8 @@ const sessionOptions: SessionOptions = {
   secret: process.env.PRIVATE_KEY,
   name: "sid",
   cookie: {
-    maxAge: 1000 * 60 * 30,
-    secure: false,
+    maxAge: 1000 * 60 * 60 * 12, // 6 hours
+    secure: process.env.NODE_ENV === "production",
     sameSite: true,
   },
   rolling: true,
