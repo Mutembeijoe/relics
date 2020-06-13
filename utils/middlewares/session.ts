@@ -13,7 +13,7 @@ const sessionOptions: SessionOptions = {
   name: "sid",
   cookie: {
     maxAge: 1000 * 60 * 60 * 12, // 6 hours
-    secure: process.env.NODE_ENV === "production",
+    secure: false,
     sameSite: true,
   },
   rolling: true,
