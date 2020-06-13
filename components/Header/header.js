@@ -83,7 +83,7 @@ const Header = ({ toggleCartOpen, cartOpen, cartItemsCount, clearCart }) => {
             </div>
           ) : (
             <div
-              className={`${styles.cartIcon} text-primary p-3`}
+              className={`${styles.cartIcon} text-primary`}
               onClick={() => toggleCartOpen(!cartOpen)}
             >
               <i className="mdi mdi-cart mdi-36px "></i>
