@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "animate.css": "3.7.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "classnames": "^2.2.6",
     "connect-redis": "^4.0.4",
